@@ -1,0 +1,19 @@
+{
+    "name": "madhuresh/donatenow",
+    "description": "donate plugin",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "./inc"
+        }
+    },
+    "authors": [
+        {
+            "name": "Madhuresh123",
+            "email": "madhuresh91394@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

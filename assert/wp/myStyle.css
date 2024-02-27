@@ -1,0 +1,240 @@
+.form_btn{
+  width: 10rem;
+  height: 4rem;
+  background-color: #1CB67D;
+  text-align: center;
+  padding-top: 1.1rem;
+  border-radius: 5px;
+  margin-left: 3rem;
+  cursor: pointer;
+}
+.form_btn > a{
+  color:white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.form_btn:hover{
+  background-color: #FF5A3F;
+}
+/* donation form */
+  body{
+      margin:0;
+      padding: 0;
+  }
+  .donate-box{
+  width: 59rem;
+  height: 65rem;
+  border: 1px solid lightgrey;
+  padding: 4rem 3rem;
+  margin: 5rem 5rem;
+  }
+
+  body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+  max-width:none;
+  margin-left: 0; 
+  margin-right:0; 
+  }
+
+  .donation-form-title{
+      width: 100%;
+      height:5rem;
+      display: flex;
+      justify-content:center;
+      margin-bottom: 3rem;
+  }
+
+  .donation-form-title > h2{
+      font-family: Inter;
+      font-weight: 600;
+      line-height: 36px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: black;
+  }
+
+  .donor-adddress-input{
+      width: 23rem;
+      height: 6rem;
+      border-radius: 5px;
+      border: 1px solid lightgrey;
+      outline: none;
+      padding: 10px;  
+  }
+
+  .form-group {
+  margin-bottom: 1rem;
+  margin-right: 7rem;
+  }
+
+  .button-box{
+      display: flex;
+      justify-content: center;
+      margin-top:2rem;
+  }
+
+  .form_submit_btn{
+      width: 26rem;
+      height: 4rem;
+      background-color: #78B598;
+      font-size:20px;
+      font-weight:700;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+  }
+
+  .form_submit_btn:hover{
+      background-color: #709583;
+  }
+  
+  .donation-address{
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  }
+
+  .des-check{
+      display:flex;
+      text-align:center;
+  }
+
+     
+     .donor-input{
+       width: 23rem!important;
+       height: 3rem!important;
+       border-radius: 5px!important;
+       border: 1px solid lightgrey!important;
+       outline: none!important;
+       padding-left: 10px!important;
+     }
+     
+     .required-symbol {
+       color: red;
+       margin-left: 5px; 
+     }
+     
+     .donor-input::placeholder {
+       position: absolute;
+       pointer-events: none;
+       transition: opacity 0.3s ease-in-out;
+       opacity: 1;
+       color: black;
+     }
+     
+     .first-info{
+       display: flex;
+       margin-bottom: 1rem;
+     }
+     
+     .popup > h2{
+       font-weight: bolder;
+     }
+     
+     .error{
+       color: red;
+     }
+
+     .donor-adddress-input{
+      width: 23rem; 
+      height: 6rem; 
+      border-radius: 5px; 
+      border: 1px solid lightgrey; 
+      outline: none;
+      padding: 10px;
+     }
+  
+     
+    /* Style for the popup */
+/* body{
+} */
+  .overlay {
+position: absolute;
+  top: 0;
+  left: 0;
+  width: 137%;
+  height: 253vh;
+  background-color: rgba(100, 100, 100, 0.7);
+  margin-top: -5rem;
+  margin-left: -8rem;
+  z-index: 100000;
+  }
+
+  .popup {
+    width: 35rem;
+    height: 15rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000000; 
+    display:block;
+  }
+
+  .container{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction: column;
+  }
+
+  .container > h3{
+      font-weight:bold;
+      font-family: Inter;
+      font-weight: 600;
+  }
+
+  .done_btn{
+      text-align: center;
+      margin-top:1rem;
+      width: 8rem;
+      padding-top: 10px;
+      height:2.8rem;
+      background-color: #78B598;
+      font-size:20px;
+      font-weight:700;
+      font-size:16px;
+      border:none;
+      border-radius: 5px;
+      color:white;
+      cursor:pointer;
+  }
+
+  .done_btn{
+      text-decoration: none;
+      color: white;
+      margin:1rem;
+  }
+
+  .done_btn:hover{
+      background-color: #FF5A3F;
+  }
+
+
+  /* Volunteer form */
+
+  .volunteer-box{
+    width: 59rem;
+    height: auto;
+    border: 1px solid lightgrey;
+    padding: 4rem 3rem;
+    margin: 5rem 5rem;
+  }
+
+  .volunteer-comment{
+    width: 53rem;
+    height: 6rem;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    outline: none;
+    padding: 10px;  
+}
+
+  

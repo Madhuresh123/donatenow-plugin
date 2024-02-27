@@ -1,0 +1,132 @@
+
+.wp-list-table{
+  font-size:20px;
+}
+
+.status-style{
+  width: 5rem;
+  background-color: #E4FFE5;
+  text-align:center;
+  border-radius:5px;
+  height: 2rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:black;
+  font-weight:500;
+}
+
+.completed {
+    background-color: #E4FFE5;
+}
+
+.pending {
+    background-color: #FBECB7;
+}
+
+.row-cell{
+  width:8rem;
+  height:3rem;
+  color:black;
+  font-weight:400;
+  padding-top:1rem;
+  font-size:14px;
+}
+
+.donation-history-title > h1{
+  font-family: Inter;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #78B598;
+}
+
+.my_search_word{
+    width:20rem;
+    height:2rem;
+  }
+
+  .my_search_btn{
+  width: 4rem;
+  height: 2rem;
+  background-color: #78B598;
+  /* background-color: red; */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left:1rem;
+}
+
+.my_search_btn:hover{
+  background-color: #709583;
+}
+
+/* donation delete php_check_syntax */
+.delete-opt{
+    width: 6rem;
+    display: flex;
+    justify-content:space-between;
+}
+
+.donate_btn{
+  width: 4rem;
+  height: 2rem;
+  background-color: #78B598;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.donate_btn:hover{
+  background-color: #709583;
+}
+
+/* donation edit php */
+.form-group {
+ margin-bottom: 15px;
+  margin-right: 1rem;
+}
+
+.donate_btn{
+  width: 8rem;
+  height: 3rem;
+  background-color: #78B598;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.donate_btn:hover{
+  background-color: #709583;
+}
+
+    .donor-input{
+  width: 23rem;
+  height: 3rem;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  outline: none;
+  padding-left: 10px;
+}
+
+.first-info{
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.donor-input::placeholder {
+  position: absolute;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+  color: black;
+}
+
+
