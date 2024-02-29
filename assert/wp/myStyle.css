@@ -221,10 +221,10 @@ position: absolute;
   /* Volunteer form */
 
   .volunteer-box{
-    width: 59rem;
+    width: 55rem;
     height: auto;
     border: 1px solid lightgrey;
-    padding: 4rem 3rem;
+    padding: 2rem 3rem;
     margin: 5rem 5rem;
   }
 
@@ -237,4 +237,28 @@ position: absolute;
     padding: 10px;  
 }
 
-  
+.divider{
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: -1rem;
+}
+
+.line{
+  width: 27rem;
+  height: 2px;
+  background-color: black;
+}
+
+.address_div{
+  padding: 0 10px;
+}
+
+.volunteer_select{
+        width: 23.7rem;
+       height: 3rem;
+       border-radius: 5px;
+       border: 1px solid lightgrey;
+       outline: none;
+       padding-left: 10px;
+}

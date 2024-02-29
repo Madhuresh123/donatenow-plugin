@@ -9,18 +9,20 @@ function clearPlaceholder(element) {
 function restorePlaceholder(element) {
     element.placeholder = currentPlaceholder;
 }
-
-      // Function to format number in Indian numbering system (1,00,000 format)
       function formatIndianNumber(amount) {
         return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    // Update donation total when input changes
-    document.getElementById('Amount').addEventListener('input', function() {
-        var amount = parseFloat(this.value.replace('₹', '')) || 0; // Remove '₹' symbol and convert to number
-        var formattedAmount = formatIndianNumber(amount.toFixed(2)); // Format amount in Indian numbering system
-        document.getElementById('donationTotal').innerText = ' ₹' + formattedAmount; // Update total with formatted amount
-    });
+    var amountId =  document.getElementById('Amount');
+
+    if(amountId){
+      amountId.addEventListener('input', function() {
+      var amount = parseFloat(this.value.replace('₹', '')) || 0; // Remove '₹' symbol and convert to number
+      var formattedAmount = formatIndianNumber(amount.toFixed(2)); // Format amount in Indian numbering system
+      document.getElementById('donationTotal').innerText = ' ₹' + formattedAmount; // Update total with formatted amount
+        });
+    }
+  
 
 jQuery.validator.addMethod("noSpecialChars", function(value, element) {
   return this.optional(element) || /^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/.test(value); // Requires at least two letters and the first character not being a space
@@ -39,12 +41,18 @@ jQuery.validator.addMethod("validPAN", function(value, element) {
   return this.optional(element) || /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value); // Validates PAN format
 });
 
+jQuery.validator.addMethod("validAadhaar", function(value, element) {
+  return this.optional(element) || /^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$/.test(value); // Validates Aadhaar format
+});
+
 jQuery.validator.addMethod("validAmount", function(value, element) {
 
   return this.optional(element) || (/^[1-9]\d*$/).test(value) && parseInt(value) < 100000;
 });
 
-
+jQuery.validator.addMethod("validZipcode", function(value, element) {
+  return this.optional(element) || (/^[1-9]\d{5}$/).test(value);
+});
 
 
   jQuery("#donation-form").validate({
@@ -83,4 +91,44 @@ jQuery.validator.addMethod("validAmount", function(value, element) {
       }
     }
   });
+
+//volunteer_form
+
+  jQuery("#volunteer-form").validate({
+    rules:{
+      volunteer_fullname: {
+        noSpecialChars:true
+      },
+      volunteer_email: {
+        validEmail:true
+      },
+      volunteer_aadhaar:{
+        validAadhaar:true,
+      },
+      volunteer_contact:{
+        onlyTenDigits:true,
+      },
+      volunteer_zip:{
+        validZipcode:true
+      },
+    },
+    messages:{
+      volunteer_fullname:{
+        noSpecialChars:"Please enter valid name"
+      },
+      volunteer_email:{
+        validEmail:"Please enter valid email"
+      },
+      volunteer_aadhaar:{
+        validAadhaar:"Please enter a valid aadhaar number"
+      },
+      volunteer_contact:{
+        onlyTenDigits:"Please enter valid phone number",
+      },
+      volunteer_zip:{
+        validZipcode:"Please enter a valid zip code"
+      }
+    }
+  });
+
 
