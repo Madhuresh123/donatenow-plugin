@@ -80,7 +80,8 @@ if(isset($_POST['register'])){
   </div>
 
   </div>
-  
+
+
   <div class="donation-address">
         <p>To make an offline donation toward this cause, follow these steps:</p>
   
@@ -89,21 +90,21 @@ if(isset($_POST['register'])){
        <div style="margin-right:8px;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20.8479 7.89722L10.2479 18.4972C10.154 18.5919 10.0262 18.6451 9.8929 18.6451C9.75958 18.6451 9.63178 18.5919 9.5379 18.4972L4.1479 13.1072C4.05324 13.0134 4 12.8856 4 12.7522C4 12.6189 4.05324 12.4911 4.1479 12.3972L4.8479 11.6972C4.94178 11.6026 5.06958 11.5493 5.2029 11.5493C5.33622 11.5493 5.46402 11.6026 5.5579 11.6972L9.8879 16.0272L19.4379 6.47722C19.6357 6.28543 19.9501 6.28543 20.1479 6.47722L20.8479 7.18722C20.9426 7.2811 20.9958 7.4089 20.9958 7.54222C20.9958 7.67554 20.9426 7.80333 20.8479 7.89722Z" fill="#78B598"/>
         </svg></div>
-        <div>Write a check payable to "RGT Welfare Foundation"</div>
+        <div style="text-align:left">Write a check payable to "RGT Welfare Foundation"</div>
     </div>
 
     <div class="des-check">
        <div style="margin-right:8px;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20.8479 7.89722L10.2479 18.4972C10.154 18.5919 10.0262 18.6451 9.8929 18.6451C9.75958 18.6451 9.63178 18.5919 9.5379 18.4972L4.1479 13.1072C4.05324 13.0134 4 12.8856 4 12.7522C4 12.6189 4.05324 12.4911 4.1479 12.3972L4.8479 11.6972C4.94178 11.6026 5.06958 11.5493 5.2029 11.5493C5.33622 11.5493 5.46402 11.6026 5.5579 11.6972L9.8879 16.0272L19.4379 6.47722C19.6357 6.28543 19.9501 6.28543 20.1479 6.47722L20.8479 7.18722C20.9426 7.2811 20.9958 7.4089 20.9958 7.54222C20.9958 7.67554 20.9426 7.80333 20.8479 7.89722Z" fill="#78B598"/>
         </svg></div>
-        <div>On the memo line of the check, indicate that the donation is for "RGT Welfare Foundation"</div>
+        <div style="text-align:left">On the memo line of the check, indicate that the donation is for "RGT Welfare Foundation"</div>
     </div>
 
     <div class="des-check">
        <div style="margin-right:8px;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20.8479 7.89722L10.2479 18.4972C10.154 18.5919 10.0262 18.6451 9.8929 18.6451C9.75958 18.6451 9.63178 18.5919 9.5379 18.4972L4.1479 13.1072C4.05324 13.0134 4 12.8856 4 12.7522C4 12.6189 4.05324 12.4911 4.1479 12.3972L4.8479 11.6972C4.94178 11.6026 5.06958 11.5493 5.2029 11.5493C5.33622 11.5493 5.46402 11.6026 5.5579 11.6972L9.8879 16.0272L19.4379 6.47722C19.6357 6.28543 19.9501 6.28543 20.1479 6.47722L20.8479 7.18722C20.9426 7.2811 20.9958 7.4089 20.9958 7.54222C20.9958 7.67554 20.9426 7.80333 20.8479 7.89722Z" fill="#78B598"/>
         </svg></div>
-        <div>Mail your check to:</div>
+        <div style="text-align:left">Mail your check to:</div>
     </div>
   </div>
     
@@ -128,6 +129,11 @@ if(isset($_POST['register'])){
   <p><strong>Donation Total:</strong><span id="donationTotal"> ₹00.00</span></p>
   
   </div>
+
+
+
+
+
         <div class="button-box">
           <input type="submit" class="form_submit_btn" name="register" value="Submit">
         </div>

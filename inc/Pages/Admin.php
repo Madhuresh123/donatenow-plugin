@@ -20,10 +20,15 @@ class Admin extends BaseController
        add_submenu_page('null', 'update-donation', 'Update donation', 'manage_options', 'donation-edit',array( $this, 'my_plugin_donation_edit' ));
 
        add_submenu_page('null', 'delete-donation', 'Delete donation', 'manage_options', 'donation-delete', array( $this, 'my_plugin_donation_delete' ));
+
+       add_submenu_page('donate_plugin', 'Volunteer', 'Volunteer', 'manage_options', 'my-plugin-volunteer', array( $this, 'volunteer_form'));
+
+       add_submenu_page('donate_plugin', 'Contact', 'Contact', 'manage_options', 'my-plugin-contact', array( $this, 'contact_form'));
+
     }
 
     public function admin_index(){
-        require_once $this->plugin_path .'/templates/admin.php';
+        require_once $this->plugin_path .'/templates/admin/donation_form.php';
     }
 
     public function my_search_func(){
@@ -32,11 +37,19 @@ class Admin extends BaseController
     }
 
     public function my_plugin_donation_edit(){
-        require_once $this->plugin_path .'/templates/donation.edit.php';
+        require_once $this->plugin_path .'/templates/admin/donation.edit.php';
      }
     
     public function my_plugin_donation_delete(){
-        require_once $this->plugin_path .'/templates/donation.delete.php';
+        require_once $this->plugin_path .'/templates/admin/donation.delete.php';
+     }
+
+     public function volunteer_form(){
+        require_once $this->plugin_path .'/templates/admin/volunteer_form.php';
+     }
+
+     public function contact_form(){
+        require_once $this->plugin_path .'/templates/admin/contact_form.php';
      }
 
 }

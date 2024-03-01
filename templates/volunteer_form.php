@@ -46,19 +46,29 @@
             <option value="Other">Other</option>
           </select>
       </div>
+
+      <div class="form-group">
+      
+      </div>
   </div>
 
-  <div>
-  
-    <div><p><strong>Do you have any prior volunteer experience?</strong></p></div>
-<div>
+    <div class="first-info">
+
+    <div class="form-group">
+
+    <p><strong>Do you have any prior volunteer experience?</strong></p>
+
     <input type="radio" id="option1" name="volunteer_experience" value="Yes">
-    <label for="option1">Yes</label>
-</div>
-<div>
+    <label for="option1">Yes</label><br>
+
     <input type="radio" id="option2" name="volunteer_experience" value="No">
     <label for="option2">No</label>
-</div><br>
+      
+      </div>
+
+      <div class="form-group">
+      
+      </div>
       
   </div>
 
@@ -125,8 +135,8 @@
   
   <div class="form-group">
     <label for="volunteer_city">City</label><br>
-    <input  class="donor-input" type="text" id="volunteer_address_2" name="volunteer_address_2"  placeholder="Enter your city"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
-    <!-- <select class="volunteer_select"  id="volunteer_city" name="volunteer_city">
+    <!-- <input  class="donor-input" type="text" id="volunteer_address_2" name="volunteer_address_2"  placeholder="Enter your city"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)"> -->
+    <select class="volunteer_select"  id="volunteer_city" name="volunteer_city">
     <option value="" disabled selected style="display:none;">Select your city</option>
     <option value="Amaravati">Amaravati</option>
     <option value="Itanagar">Itanagar</option>
@@ -162,7 +172,7 @@
     <option value="Kavaratti">Kavaratti</option>
     <option value="New Delhi">New Delhi</option>
     <option value="Puducherry">Puducherry</option>
-</select> -->
+</select>
   </div>
   <div class="form-group">
     <label for="volunteer_state">State</label><br>
@@ -221,13 +231,24 @@
   </div>
   </div>
 
-  <label for="volunteer_comments">Comments</label><br>
+  <div class="first-info">
+
+  <div style="width:90%;">
+  <label for="volunteer_comments" style="font-size:14px;">Comments</label><br>
   <textarea class="volunteer-comment" id="volunteer_comments" name="volunteer_comments" placeholder="Enter your comments" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)"></textarea>
+</div>
 
-  <div><br><span> Please click here to see <a href="https://rgtfoundation.org/terms-and-conditions/" style="color:green;">Terms and Condition</a></span></div>
+  </div>
 
-    <div><br><input type="checkbox" id="myCheckbox" name="myCheckbox" required><strong><span> I agree with the terms and condition</span></strong></div>
-  
+  <div class="first-info">
+
+<div style="width:90%;">
+<div><br><span> Please click here to see <a href="https://rgtfoundation.org/terms-and-conditions/" style="color:green;">Terms and Condition</a></span></div>
+<div><br><input type="checkbox" id="myCheckbox" name="myCheckbox" required><strong><span> I agree with the terms and condition</span></strong></div>
+</div>
+
+</div>
+
 
         <div class="button-box">
           <input type="submit" class="form_submit_btn" name="volunteer_register" value="Submit" >

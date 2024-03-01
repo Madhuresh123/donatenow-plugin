@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Donate Now
  * Description: The most robust, flexible, and intuitive way to accept donations on WordPress.
- * Version: 0.1
+ * Version: 2.0
  * Author: Madhuresh
  * 
  */
