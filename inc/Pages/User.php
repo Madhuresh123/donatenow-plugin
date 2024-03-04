@@ -14,6 +14,8 @@ class User extends BaseController
         add_shortcode('volunteer_form' , array( $this, 'volunteer_form' ));
         add_shortcode('contact_form' , array( $this, 'contact_form' ));
 
+        add_action('wp_ajax_spinnal_form',array($this, 'spinnal_form'));
+        add_action('wp_ajax_nopriv_spinnal_form', array($this, 'spinnal_form'));
     }
 
     public function donation_btn_2(){
@@ -54,6 +56,11 @@ class User extends BaseController
             require_once $this->plugin_path .'/templates/contact_form.php';
             return ob_get_clean();
         
+    }
+
+    public function spinnal_form(){
+
+        require_once $this->plugin_path .'/templates/ajax_contact_form.php';
     }
 
 }

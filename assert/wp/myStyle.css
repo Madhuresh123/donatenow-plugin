@@ -120,9 +120,6 @@
       display:flex;
       text-align:center;
   }
-
-     
-
      
      .required-symbol {
        color: red;
@@ -263,6 +260,39 @@ position: absolute;
        padding-left: 10px;
 }
 
+/* contact form */
+.contact-message{
+  width: 95.3%;
+  height: 6rem;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  outline: none;
+  padding: 10px; 
+}
+
+.contact_form_btn{
+  width: 8rem;
+  height: 4rem;
+  background-color: #78B598;
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  background-color: #1CB67D;
+}
+
+.contact_form_btn:hover{
+  background-color: #FF5A3F;
+}
+.contact_input_div{
+  margin-bottom: 2rem;
+}
+
+.contact_input_div > label{
+  font-size: 14px;
+}
 
 @media screen and (max-width: 800px) {
 

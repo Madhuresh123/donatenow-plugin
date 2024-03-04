@@ -56,7 +56,22 @@ if(!defined('ABSPATH')){
  //Plugin deactivation
  register_deactivation_hook(__FILE__,'deactivate');
 
+
+//  function spinnal_contact_form(){
+//    $contact_name = $_POST['contact_name'];
+//    echo $contact_name;
+//    wp_die();
+// }
+
+//  add_action('wp_ajax_nopriv_spinnal_contact_form','spinnal_contact_form');
+
+
+
 //Initializing all the core classes of the plugin
  if(!class_exists('INC\\Init')){
     Inc\Init::register_services();
  }
+
+
+
+

@@ -10,6 +10,7 @@ ob_start()
 <div class="wrap">
 
 <div class="donation-history-title"><h1>Donation History</h1></div>
+
 <div class="search-input">
 <form action="<?php echo admin_url('admin.php'); ?>" id="my-search-form">
   <input type="hidden" name="page" value="my-plugin-page">
@@ -17,6 +18,9 @@ ob_start()
   <input class="my_search_btn" type="submit" name="search" value="Search" />
 </form>
 </div>
+
+
+
 <table class="wp-list-table widefat fixed striped table-view-list posts" style="margin-top:1rem;">
   <tr>
   <th><strong>Donation Id</strong></th>

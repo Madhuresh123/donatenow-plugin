@@ -9,7 +9,12 @@ class Admin extends BaseController
     public function register(){
         
         add_action('admin_menu', array($this, 'add_admin_pages'));
+
         add_action('wp_ajax_my_search_func',array($this, 'my_search_func'));
+        add_action('wp_ajax_nopriv_my_search_func',array($this, 'my_search_func'));
+
+        // add_action('wp_ajax_spinnal_form',array($this, 'spinnal_form'));
+        // add_action('wp_ajax_nopriv_spinnal_form', array($this, 'spinnal_form'));
 
     }
 
@@ -32,7 +37,6 @@ class Admin extends BaseController
     }
 
     public function my_search_func(){
-
         require_once $this->plugin_path .'/templates/my_search_func.php';
     }
 
@@ -51,5 +55,11 @@ class Admin extends BaseController
      public function contact_form(){
         require_once $this->plugin_path .'/templates/admin/contact_form.php';
      }
+
+    //  public function spinnal_form(){
+    //     $contact_name = $_POST['contact_name'];
+    //     echo $contact_name;
+    //     wp_die();
+    // }
 
 }

@@ -24,7 +24,7 @@
         <div class="form-group">
           <label for="volunteer_age">Age</label><br>
           <select class="volunteer_select" id="volunteer_age" name="volunteer_age">
-          <option value="" disabled selected style="display:none;">Enter your age</option>
+          <option value="" disabled selected style="display:none;">Select your age</option>
             <option value="18-25">18 years - 25 years</option>
             <option value="25-35">25 years - 35 years</option>
             <option value="35-45">35 years - 45 years</option>

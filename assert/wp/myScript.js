@@ -130,3 +130,25 @@ jQuery("#volunteer-form").validate({
     }
   }
 });
+
+
+//contact_form
+
+jQuery("#spinal-contact-form").validate({
+  rules: {
+    contact_name: {
+      noSpecialChars: true
+    },
+    contact_email: {
+      validEmail: true
+    },
+  },
+  messages: {
+    contact_name: {
+      noSpecialChars: "Please enter valid name"
+    },
+    contact_email: {
+      validEmail: "Please enter valid email"
+    },
+  }
+});

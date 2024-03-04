@@ -130,10 +130,6 @@ if(isset($_POST['register'])){
   
   </div>
 
-
-
-
-
         <div class="button-box">
           <input type="submit" class="form_submit_btn" name="register" value="Submit">
         </div>

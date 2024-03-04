@@ -25,20 +25,14 @@ class Enqueue extends BaseController
 
     public function wp_enqueue(){
 
-        $current_page_slug = basename(get_permalink());
-
         $styleVer = filemtime($this->plugin_path .'assert/wp/myStyle.css');
         $scriptVer = filemtime($this->plugin_path .'assert/wp/myScript.js');
-
-        $overlay_style_ver = filemtime($this->plugin_path . 'assert/wp/overlay.css');
-
         
         wp_enqueue_style('my_wp_plugin_style', $this->plugin_url . 'assert/wp/myStyle.css', '',  $styleVer,'');
         wp_enqueue_script('my_wp_plugin_script', $this->plugin_url . 'assert/wp/myScript.js', array('jquery'),  $scriptVer,true);
-
-        if ($current_page_slug === 'donation_receipt_2') {
-            wp_enqueue_style('my_wp_plugin_overlay_style', $this->plugin_url . 'assert/wp/overlay.css', '', $overlay_style_ver);
-        }
+        
+        //ajax call
+        wp_add_inline_script('my_wp_plugin_script', 'var ajaxUrl = "'.admin_url('admin-ajax.php').'";' , 'before');
 
     }
 
