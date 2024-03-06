@@ -16,6 +16,9 @@ class User extends BaseController
 
         add_action('wp_ajax_spinnal_form',array($this, 'spinnal_form'));
         add_action('wp_ajax_nopriv_spinnal_form', array($this, 'spinnal_form'));
+
+        add_action('wp_ajax_spinnal_volunteer_form',array($this, 'spinnal_volunteer_form'));
+        add_action('wp_ajax_nopriv_spinnal_volunteer_form', array($this, 'spinnal_volunteer_form'));
     }
 
     public function donation_btn_2(){
@@ -61,6 +64,11 @@ class User extends BaseController
     public function spinnal_form(){
 
         require_once $this->plugin_path .'/templates/ajax_contact_form.php';
+    }
+
+    public function spinnal_volunteer_form(){
+
+        require_once $this->plugin_path .'/templates/ajax_volunteer_form.php';
     }
 
 }

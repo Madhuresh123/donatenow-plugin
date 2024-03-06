@@ -67,6 +67,12 @@
               console.log(response);
               if(response === 'success'){
 
+                $('#contact_name').val('');
+                $('#contact_email').val('');
+                $('#contact_phone').val('');
+                $('#contact_subject').val('');
+                $('#contact_message').val('');
+
               $('#contact-form-result').text('Submitted successfully').css('color', 'green');
 
               }else{

@@ -19,7 +19,7 @@
   
         <div class="form-group">
           <label for="volunteer_aadhaar">Aadhaar Number<span class="required-symbol">*</span></label><br>
-          <input class="donor-input"  type="tel" id="volunteer_aadhaar" name="volunteer_aadhaar"  placeholder="Enter your aadhaar number"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required >
+          <input class="donor-input"  type="text" id="volunteer_aadhaar" name="volunteer_aadhaar"  placeholder="Enter your aadhaar number"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required >
         </div>
         <div class="form-group">
           <label for="volunteer_age">Age</label><br>
@@ -123,7 +123,7 @@
   
   <div class="form-group">
     <label for="volunteer_address_1">Address Lane 1</label><br>
-    <input class="donor-input"  type="tel" id="volunteer_address_1" name="volunteer_address_1"  placeholder="Enter address lane 1"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
+    <input class="donor-input"  type="text" id="volunteer_address_1" name="volunteer_address_1"  placeholder="Enter address lane 1"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
   </div>
   <div class="form-group">
     <label for="volunteer_address_2">Address Lane 2</label><br>
@@ -135,7 +135,6 @@
   
   <div class="form-group">
     <label for="volunteer_city">City</label><br>
-    <!-- <input  class="donor-input" type="text" id="volunteer_address_2" name="volunteer_address_2"  placeholder="Enter your city"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)"> -->
     <select class="volunteer_select"  id="volunteer_city" name="volunteer_city">
     <option value="" disabled selected style="display:none;">Select your city</option>
     <option value="Amaravati">Amaravati</option>
@@ -220,13 +219,13 @@
   
   <div class="form-group">
     <label for="volunteer_zip">ZIP Code</label><br>
-    <input class="donor-input"  type="tel" id="volunteer_zip" name="volunteer_zip"  placeholder="Enter your zip code"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
+    <input class="donor-input"  type="text" id="volunteer_zip" name="volunteer_zip"  placeholder="Enter your zip code"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
   </div>
   <div class="form-group">
     <label for="volunteer_country">Country</label><br>
     <select class="volunteer_select"  id="volunteer_country" name="volunteer_country">
     <option value="" disabled selected style="display:none;">Select your country</option>
-      <option value="Weekdays">India</option>
+      <option value="India">India</option>
     </select>
   </div>
   </div>
@@ -244,7 +243,9 @@
 
 <div style="width:90%;">
 <div><br><span> Please click here to see <a href="https://rgtfoundation.org/terms-and-conditions/" style="color:green;">Terms and Condition</a></span></div>
-<div><br><input type="checkbox" id="myCheckbox" name="myCheckbox" required><strong><span> I agree with the terms and condition</span></strong></div>
+<div><br>
+<input type="checkbox" id="myCheckbox" name="myCheckbox" required>
+<strong><span> I agree with the terms and condition</span></strong></div>
 </div>
 
 </div>
@@ -254,6 +255,91 @@
           <input type="submit" class="form_submit_btn" name="volunteer_register" value="Submit" >
         </div>
       </form>
+
+      <div id="volunteer-form-result"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+
+jQuery(document).ready(function($){
+    let spinal_volunteer_form = $('#volunteer-form');
+
+
+    spinal_volunteer_form.submit(function(event){
+        event.preventDefault();
+
+              let volunteer_fullname      =  $('#volunteer_fullname').val();
+              let volunteer_email         =  $('#volunteer_email').val();
+              let volunteer_aadhaar       =  $('#volunteer_aadhaar').val();
+              let volunteer_age           =  $('#volunteer_age').val();
+              let volunteer_profession    =  $('#volunteer_profession').val();
+              let volunteer_duration      =  $('#volunteer_duration').val();
+              let volunteer_preferences   =  $('#volunteer_preferences').val();
+              let volunteer_availability  =  $('#volunteer_availability').val();
+              let volunteer_contact       =  $('#volunteer_contact').val();
+              let volunteer_address_1     =  $('#volunteer_address_1').val();
+              let volunteer_address_2     =  $('#volunteer_address_2').val();
+              let volunteer_city          =  $('#volunteer_city').val();
+              let volunteer_state         =  $('#volunteer_state').val();
+              let volunteer_zip           =  $('#volunteer_zip').val();
+              let volunteer_country       =  $('#volunteer_country').val();
+              let volunteer_comments      =  $('#volunteer_comments').val();
+              let myCheckbox      =     $('#myCheckbox').is(':checked');
+
+
+        let formData = new FormData();
+
+        formData.append('action', 'spinnal_volunteer_form');
+        formData.append('volunteer_fullname', volunteer_fullname);
+        formData.append('volunteer_email', volunteer_email);
+        formData.append('volunteer_aadhaar', volunteer_aadhaar);
+        formData.append('volunteer_age', volunteer_age);
+        formData.append('volunteer_profession', volunteer_profession);
+        formData.append('volunteer_duration', volunteer_duration);
+        formData.append('volunteer_preferences', volunteer_preferences);
+        formData.append('volunteer_availability', volunteer_availability);
+        formData.append('volunteer_contact', volunteer_contact);
+        formData.append('volunteer_address_1', volunteer_address_1);
+        formData.append('volunteer_address_2', volunteer_address_2);
+        formData.append('volunteer_city', volunteer_city);
+        formData.append('volunteer_state', volunteer_state);
+        formData.append('volunteer_zip', volunteer_zip);
+        formData.append('volunteer_country', volunteer_country);
+        formData.append('volunteer_comments', volunteer_comments);
+        formData.append('myCheckbox', myCheckbox);
+
+
+        $.ajax({
+          url: ajaxUrl,
+          type: 'post',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(response){
+              console.log(response);
+              if(response === 'success'){
+
+                $('#volunteer-form').css('display','none');
+
+              $('#volunteer-form-result').text('Thank you. Volunteer form submitted successfully').css('color', 'green');
+
+              }else{
+              
+                $('#volunteer-form-result').text('Submission failed. Please try again.').css('color', 'red');
+                
+              }
+          },
+          error: function(response){
+              console.log('error',response);
+              $('#volunteer-form-result').text('Submission failed. Please try again.').css('color', 'red');
+          }
+
+        });
+
+    });
+});
+
+
+</script>

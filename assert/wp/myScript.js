@@ -142,6 +142,9 @@ jQuery("#spinal-contact-form").validate({
     contact_email: {
       validEmail: true
     },
+    contact_phone:{
+      onlyTenDigits: true,
+    }
   },
   messages: {
     contact_name: {
@@ -150,5 +153,8 @@ jQuery("#spinal-contact-form").validate({
     contact_email: {
       validEmail: "Please enter valid email"
     },
+    contact_phone:{
+      onlyTenDigits: "Please enter valid phone number",
+    }
   }
 });
