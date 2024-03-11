@@ -1,3 +1,22 @@
+<?php
+ global $wpdb, $table_prefix;
+
+ //states data
+ $wp_states = $table_prefix . 'states';
+
+ $q = "SELECT * from `$wp_states`;";
+ $states = $wpdb->get_results($q);
+
+  //districts data
+  $wp_districts = $table_prefix . 'districts';
+
+  $q = "SELECT * from `$wp_districts`;";
+  $districts = $wpdb->get_results($q);
+
+
+?>
+
+
 
 <div class=volunteer-box>
     <div class="donation-form-title"><h2>Volunteer Registration</h2></div>
@@ -61,7 +80,7 @@
     <input type="radio" id="option1" name="volunteer_experience" value="Yes">
     <label for="option1">Yes</label><br>
 
-    <input type="radio" id="option2" name="volunteer_experience" value="No">
+    <input type="radio" id="option2" name="volunteer_experience" value="No" checked>
     <label for="option2">No</label>
       
       </div>
@@ -76,7 +95,7 @@
   
   <div class="form-group">
     <label for="volunteer_duration">If yes, please specify how long</label><br>
-    <select class="volunteer_select"  id="volunteer_duration" name="volunteer_duration">
+    <select class="volunteer_select"  id="volunteer_duration" name="volunteer_duration" disabled>
     <option value="" disabled selected style="display:none;">Select your prior experience</option>
     <option value="1">1 Year</option>
     <option value="2">2 Years</option>
@@ -137,81 +156,32 @@
     <label for="volunteer_city">City</label><br>
     <select class="volunteer_select"  id="volunteer_city" name="volunteer_city">
     <option value="" disabled selected style="display:none;">Select your city</option>
-    <option value="Amaravati">Amaravati</option>
-    <option value="Itanagar">Itanagar</option>
-    <option value="Dispur">Dispur</option>
-    <option value="Patna">Patna</option>
-    <option value="Raipur">Raipur</option>
-    <option value="Panaji">Panaji</option>
-    <option value="Gandhinagar">Gandhinagar</option>
-    <option value="Chandigarh">Chandigarh</option>
-    <option value="Shimla">Shimla</option>
-    <option value="Ranchi">Ranchi</option>
-    <option value="Bengaluru">Bengaluru</option>
-    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
-    <option value="Bhopal">Bhopal</option>
-    <option value="Mumbai">Mumbai</option>
-    <option value="Imphal">Imphal</option>
-    <option value="Shillong">Shillong</option>
-    <option value="Aizawl">Aizawl</option>
-    <option value="Kohima">Kohima</option>
-    <option value="Bhubaneswar">Bhubaneswar</option>
-    <option value="Chandigarh">Chandigarh</option>
-    <option value="Jaipur">Jaipur</option>
-    <option value="Gangtok">Gangtok</option>
-    <option value="Chennai">Chennai</option>
-    <option value="Hyderabad">Hyderabad</option>
-    <option value="Agartala">Agartala</option>
-    <option value="Lucknow">Lucknow</option>
-    <option value="Dehradun">Dehradun</option>
-    <option value="Kolkata">Kolkata</option>
-    <option value="Port Blair">Port Blair</option>
-    <option value="Chandigarh">Chandigarh</option>
-    <option value="Daman">Daman</option>
-    <option value="Kavaratti">Kavaratti</option>
-    <option value="New Delhi">New Delhi</option>
-    <option value="Puducherry">Puducherry</option>
+    
+    <?php foreach($districts as $district): ?>
+      <option value=<?php echo $district->mid; ?> ><?php echo $district->districts; ?></option>
+    <?php endforeach; ?>
+
 </select>
   </div>
   <div class="form-group">
     <label for="volunteer_state">State</label><br>
-    <select class="volunteer_select"  id="volunteer_state" name="volunteer_state">
+    <select class="volunteer_select"  id="volunteer_state" name="volunteer_state" role="combobox">
     <option value="" disabled selected style="display:none;">Select your state</option>
-    <option value="Andhra Pradesh">Andhra Pradesh</option>
-    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-    <option value="Assam">Assam</option>
-    <option value="Bihar">Bihar</option>
-    <option value="Chhattisgarh">Chhattisgarh</option>
-    <option value="Goa">Goa</option>
-    <option value="Gujarat">Gujarat</option>
-    <option value="Haryana">Haryana</option>
-    <option value="Himachal Pradesh">Himachal Pradesh</option>
-    <option value="Jharkhand">Jharkhand</option>
-    <option value="Karnataka">Karnataka</option>
-    <option value="Kerala">Kerala</option>
-    <option value="Madhya Pradesh">Madhya Pradesh</option>
-    <option value="Maharashtra">Maharashtra</option>
-    <option value="Manipur">Manipur</option>
-    <option value="Meghalaya">Meghalaya</option>
-    <option value="Mizoram">Mizoram</option>
-    <option value="Nagaland">Nagaland</option>
-    <option value="Odisha">Odisha</option>
-    <option value="Punjab">Punjab</option>
-    <option value="Rajasthan">Rajasthan</option>
-    <option value="Sikkim">Sikkim</option>
-    <option value="Tamil Nadu">Tamil Nadu</option>
-    <option value="Telangana">Telangana</option>
-    <option value="Tripura">Tripura</option>
-    <option value="Uttar Pradesh">Uttar Pradesh</option>
-    <option value="Uttarakhand">Uttarakhand</option>
-    <option value="West Bengal">West Bengal</option>
-    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-    <option value="Chandigarh">Chandigarh</option>
-    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
-    <option value="Lakshadweep">Lakshadweep</option>
-    <option value="Delhi">Delhi (National Capital Territory of Delhi)</option>
-    <option value="Puducherry">Puducherry (Pondicherry)</option>
+
+    <?php foreach($states as $state): ?>
+      <option value=<?php echo $state->mid; ?> ><?php echo $state->states; ?></option>
+    <?php endforeach; ?>
+
 </select>
+
+<!-- <input type="text" id="state_input" class="volunteer_input" placeholder="Type to search states">
+<div id="state_dropdown" class="dropdown-content">
+    <?php foreach ($states as $state): ?>
+        <div class="state_option" data-value="<?php echo $state->mid; ?>"><?php echo $state->states; ?></div>
+    <?php endforeach; ?>
+</div> -->
+
+
   </div>
   </div>
 
@@ -243,14 +213,17 @@
 
 <div style="width:90%;">
 <div><br><span> Please click here to see <a href="https://rgtfoundation.org/terms-and-conditions/" style="color:green;">Terms and Condition</a></span></div>
-<div><br>
-<input type="checkbox" id="myCheckbox" name="myCheckbox" required>
-<strong><span> I agree with the terms and condition</span></strong></div>
+
+<div ><br>
+<input type="checkbox" id="myCheckbox" name="myCheckbox">
+<strong> I agree with the terms and condition</strong>
+<div id="error-check-box"></div>
+
+
+</div>
 </div>
 
 </div>
-
-
         <div class="button-box">
           <input type="submit" class="form_submit_btn" name="volunteer_register" value="Submit" >
         </div>
@@ -261,6 +234,61 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+
+jQuery(document).ready(function($) {
+  let volunteer_state = $('#volunteer_state');
+
+  volunteer_state.on('change', function(event) {
+    let state = $(this).val(); // Changed .val to .val()
+    let formData = new FormData();
+    formData.append('action', 'func_state');
+    formData.append('state_value', state); // Changed dataValue to state
+
+    $.ajax({
+      url: ajaxUrl, // Make sure ajaxUrl is defined somewhere in your script
+      type: 'post',
+      data: formData,
+      processData: false, // Don't process the files
+      contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+      success: function(response) {
+            console.log(response);
+            $('#volunteer_city').html(response);
+
+            console.log('success');         
+      },
+      error: function(response) {
+        console.log('Error:',response);
+      }
+    });
+  });
+});
+
+
+
+// Wait for the DOM to be loaded before running the script
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Get references to the radio buttons and the select element
+    var yesOption = document.getElementById('option1');
+    var noOption = document.getElementById('option2');
+    var volunteerSelect = document.getElementById('volunteer_duration');
+
+    // Function to enable/disable the select based on the radio button state
+    function updateSelectState() {
+        if (yesOption.checked) {
+            volunteerSelect.disabled = false;
+        } else if (noOption.checked) {
+            volunteerSelect.disabled = true;
+            volunteerSelect.value ="";
+        }
+    } 
+
+    // Add event listeners to the radio buttons to trigger the state update function
+    yesOption.addEventListener('change', updateSelectState);
+    noOption.addEventListener('change', updateSelectState);
+});
+</script>
 <script>
 
 jQuery(document).ready(function($){
@@ -318,21 +346,26 @@ jQuery(document).ready(function($){
           processData: false,
           contentType: false,
           success: function(response){
-              console.log(response);
               if(response === 'success'){
 
                 $('#volunteer-form').css('display','none');
 
-              $('#volunteer-form-result').text('Thank you. Volunteer form submitted successfully').css('color', 'green');
+              $('#volunteer-form-result').text('Thank you. Volunteer form submitted successfully').css({
+                    'color': 'green',
+                    'margin-left': '30%'
+                    });
 
               }else{
               
-                $('#volunteer-form-result').text('Submission failed. Please try again.').css('color', 'red');
-                
+                $('#volunteer-form-result').text('Submission failed. Please try again.').css({
+                    'color': 'red',
+                    'margin-left': '1%'
+                    });      
+                  
+                $('#error-check-box').text('This field is required.').css('color','red');
               }
           },
           error: function(response){
-              console.log('error',response);
               $('#volunteer-form-result').text('Submission failed. Please try again.').css('color', 'red');
           }
 

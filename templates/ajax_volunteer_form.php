@@ -36,17 +36,14 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_volunteer_form';
         }
 
         function isValidAadhaar($value) {
-            return preg_match('/^[2-9]{1}[0-9]{3}\s[0-9]{4}\s[0-9]{4}$/', $value);
+            return preg_match('/^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/', $value);
         }
 
     if( !empty($volunteer_fullname) && noSpecialChars($volunteer_fullname) 
         && !empty($volunteer_email) && validEmail($volunteer_email)
         && !empty($volunteer_contact) && validPhone($volunteer_contact) 
+        && !empty($volunteer_aadhaar) && isValidAadhaar($volunteer_aadhaar)
         && $myCheckbox=== 'true'){  
-
-        if(!empty($volunteer_aadhaar) && !isValidAadhaar($volunteer_aadhaar)){
-            echo 'error';
-        }
 
         echo 'success';
         

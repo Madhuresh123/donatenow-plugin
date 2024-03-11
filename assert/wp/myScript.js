@@ -42,7 +42,7 @@ jQuery.validator.addMethod("validPAN", function (value, element) {
 });
 
 jQuery.validator.addMethod("validAadhaar", function (value, element) {
-  return this.optional(element) || /^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$/.test(value); // Validates Aadhaar format
+  return this.optional(element) || /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/.test(value); // Validates Aadhaar format
 });
 
 jQuery.validator.addMethod("validAmount", function (value, element) {
@@ -120,7 +120,7 @@ jQuery("#volunteer-form").validate({
       validEmail: "Please enter valid email"
     },
     volunteer_aadhaar: {
-      validAadhaar: "Please enter a valid aadhaar number"
+      validAadhaar: "Please enter a valid aadhaar number with spaces"
     },
     volunteer_contact: {
       onlyTenDigits: "Please enter valid phone number",

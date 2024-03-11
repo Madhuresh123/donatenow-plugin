@@ -22,11 +22,8 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_contact_form';
             return preg_match('/^\d{10}$/', $value);
         }
 
-    if( !empty($contact_name) && noSpecialChars($contact_name) && !empty($contact_email) && validEmail($contact_email) && !empty($contact_subject) ){
+    if( !empty($contact_name) && noSpecialChars($contact_name) && !empty($contact_email) && validEmail($contact_email) && !empty($contact_phone) && validPhone($contact_phone)){
 
-        if(!empty($contact_phone) && !validPhone($contact_phone)){
-            echo 'error';
-        }
 
         $contact_form_data = array(
             'name' => $contact_name,
