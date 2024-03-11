@@ -22,6 +22,12 @@ class User extends BaseController
 
         add_action('wp_ajax_func_state',array($this, 'func_state'));
         add_action('wp_ajax_nopriv_func_state', array($this, 'func_state'));
+
+        add_action('wp_ajax_state_search',array($this, 'func_state_search'));
+        add_action('wp_ajax_nopriv_state_search', array($this, 'func_state_search'));
+
+        add_action('wp_ajax_city_search',array($this, 'func_city_search'));
+        add_action('wp_ajax_nopriv_city_search', array($this, 'func_city_search'));
     }
 
     public function donation_btn_2(){
@@ -76,6 +82,14 @@ class User extends BaseController
 
     public function func_state(){
         require_once $this->plugin_path .'/templates/ajax_state.php';
+    }
+
+    public function func_state_search(){
+        require_once $this->plugin_path .'/templates/ajax_state_search.php';
+    }
+
+    public function func_city_search(){
+        require_once $this->plugin_path .'/templates/ajax_city_search.php';
     }
 
 }

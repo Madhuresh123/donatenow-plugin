@@ -16,6 +16,25 @@
 
 ?>
 
+<style>
+
+.dropdown-content{
+
+  background-color: lightgrey;
+}
+
+
+  .dropdown-content > li{
+    list-style: none;
+    cursor: pointer;
+    padding-left:5px;
+  }
+
+  .dropdown-content > li:hover{
+
+    background-color: lightblue;
+  }
+</style>
 
 
 <div class=volunteer-box>
@@ -151,39 +170,28 @@
   </div>
 
   <div class="first-info">
+
+  <div class="form-group">
+    <label for="volunteer_state">State</label><br>
+
+<input type="text" id="state_input"  class="donor-input" placeholder="Select your state">
+<div id="state_dropdown" class="dropdown-content"></div>
+
+  </div>
   
   <div class="form-group">
     <label for="volunteer_city">City</label><br>
-    <select class="volunteer_select"  id="volunteer_city" name="volunteer_city">
-    <option value="" disabled selected style="display:none;">Select your city</option>
-    
-    <?php foreach($districts as $district): ?>
-      <option value=<?php echo $district->mid; ?> ><?php echo $district->districts; ?></option>
-    <?php endforeach; ?>
 
-</select>
-  </div>
-  <div class="form-group">
-    <label for="volunteer_state">State</label><br>
-    <select class="volunteer_select"  id="volunteer_state" name="volunteer_state" role="combobox">
-    <option value="" disabled selected style="display:none;">Select your state</option>
-
-    <?php foreach($states as $state): ?>
-      <option value=<?php echo $state->mid; ?> ><?php echo $state->states; ?></option>
-    <?php endforeach; ?>
-
-</select>
-
-<!-- <input type="text" id="state_input" class="volunteer_input" placeholder="Type to search states">
-<div id="state_dropdown" class="dropdown-content">
-    <?php foreach ($states as $state): ?>
-        <div class="state_option" data-value="<?php echo $state->mid; ?>"><?php echo $state->states; ?></div>
-    <?php endforeach; ?>
-</div> -->
+<input type="text" id="city_input"  class="donor-input" placeholder="Select your city">
+<div id="city_dropdown" class="dropdown-content"></div>
 
 
   </div>
-  </div>
+
+
+
+  
+    </div>
 
   <div class="first-info">
   
@@ -212,7 +220,7 @@
   <div class="first-info">
 
 <div style="width:90%;">
-<div><br><span> Please click here to see <a href="https://rgtfoundation.org/terms-and-conditions/" style="color:green;">Terms and Condition</a></span></div>
+<div><br><span> Please click here to see <a href="https://staging-77e6-ratnaglobaltechnologies.wpcomstaging.com/terms-and-conditions/" style="color:green;">Terms and Condition</a></span></div>
 
 <div ><br>
 <input type="checkbox" id="myCheckbox" name="myCheckbox">
@@ -237,25 +245,59 @@
 <script>
 
 jQuery(document).ready(function($) {
-  let volunteer_state = $('#volunteer_state');
 
-  volunteer_state.on('change', function(event) {
-    let state = $(this).val(); // Changed .val to .val()
+  let state_input = $('#state_input');
+
+  state_input.keyup(function() {
+    let state = $(this).val();
+
+    if (state !== '') {
+      let formData = new FormData();
+      formData.append('action', 'state_search');
+      formData.append('state_input', state);
+
+      $.ajax({
+        url: ajaxUrl,
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          $('#state_dropdown').fadeIn().html(response);
+        },
+        error: function(response) {
+          console.log('Error:', response);
+        }
+      });
+    } else {
+      $('#state_dropdown').fadeOut().html("");
+    }
+  });
+
+  // Handle click on list item
+  $('#state_dropdown').on('click', 'li', function() {
+    $('#state_input').val($(this).text());
+    $('#city_input').val("");
+    $('#state_dropdown').fadeOut();
+
+    let state = $(this).val();
     let formData = new FormData();
     formData.append('action', 'func_state');
-    formData.append('state_value', state); // Changed dataValue to state
+    formData.append('state_value', state);
 
     $.ajax({
-      url: ajaxUrl, // Make sure ajaxUrl is defined somewhere in your script
+      url: ajaxUrl, 
       type: 'post',
       data: formData,
-      processData: false, // Don't process the files
-      contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+      processData: false,
+      contentType: false, 
       success: function(response) {
-            console.log(response);
-            $('#volunteer_city').html(response);
+            $('#city_dropdown').fadeIn().html(response);
 
-            console.log('success');         
+            $('#city_dropdown').on('click', 'li', function() {
+                      $('#city_input').val($(this).text());
+                      $('#city_dropdown').fadeOut();
+                  });            
       },
       error: function(response) {
         console.log('Error:',response);
@@ -264,6 +306,52 @@ jQuery(document).ready(function($) {
   });
 });
 
+
+
+jQuery(document).ready(function($){
+
+      let city_input = $('#city_input');
+      let state_input = $('#state_input');
+
+
+      city_input.keyup(function() {
+              let city = $(this).val();
+              let state = $('#state_input').val();
+
+
+              if (city !== '') {
+                let formData = new FormData();
+                formData.append('action', 'city_search');
+                formData.append('city_input', city);
+
+                $.ajax({
+                  url: ajaxUrl,
+                  type: 'post',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  success: function(response) {
+                    $('#city_dropdown').fadeIn().html(response);
+                  },
+                  error: function(response) {
+                    console.log('Error:', response);
+                  }
+                });
+              } else {
+                $('#city_dropdown').fadeOut().html("");
+              }
+        });
+
+    
+          // Handle click on list item
+  $('#city_dropdown').on('click', 'li', function() {
+    $('#city_input').val($(this).text());
+    $('#city_dropdown').fadeOut();
+  });
+
+      
+
+});
 
 
 // Wait for the DOM to be loaded before running the script
@@ -288,6 +376,8 @@ document.addEventListener('DOMContentLoaded', function () {
     yesOption.addEventListener('change', updateSelectState);
     noOption.addEventListener('change', updateSelectState);
 });
+
+
 </script>
 <script>
 
@@ -310,7 +400,7 @@ jQuery(document).ready(function($){
               let volunteer_address_1     =  $('#volunteer_address_1').val();
               let volunteer_address_2     =  $('#volunteer_address_2').val();
               let volunteer_city          =  $('#volunteer_city').val();
-              let volunteer_state         =  $('#volunteer_state').val();
+              let volunteer_state         =  $('#state_input').val($(this).text());
               let volunteer_zip           =  $('#volunteer_zip').val();
               let volunteer_country       =  $('#volunteer_country').val();
               let volunteer_comments      =  $('#volunteer_comments').val();

@@ -12,15 +12,22 @@ if($state_value){
     $results = $wpdb->get_results($query);
 
     foreach ($results as $row) {
-        echo '<option value="' . $row->mid . '">' . $row->districts . '</option>';
+        // echo '<option value="' . $row->mid . '">' . $row->districts . '</option>';
+        echo '<li value="' . $row->mid . '">' . $row->districts . '</li>';
     }
     
 }
 else{
-    $query = $wpdb->prepare("SELECT * FROM $wp_districts");
-
-    $results = $wpdb->get_results($query);
+    echo '<li> No state found </li>';
+    wp_die();
 }
+
+
+// else{
+//     $query = $wpdb->prepare("SELECT * FROM $wp_districts");
+
+//     $results = $wpdb->get_results($query);
+// }
 
 wp_die();
 
