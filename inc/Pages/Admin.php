@@ -12,10 +12,6 @@ class Admin extends BaseController
 
         add_action('wp_ajax_my_search_func',array($this, 'my_search_func'));
         add_action('wp_ajax_nopriv_my_search_func',array($this, 'my_search_func'));
-
-        // add_action('wp_ajax_spinnal_form',array($this, 'spinnal_form'));
-        // add_action('wp_ajax_nopriv_spinnal_form', array($this, 'spinnal_form'));
-
     }
 
     public function add_admin_pages(){
@@ -37,7 +33,7 @@ class Admin extends BaseController
     }
 
     public function my_search_func(){
-        require_once $this->plugin_path .'/templates/my_search_func.php';
+        require_once $this->plugin_path .'/templates/ajax/my_search_func.php';
     }
 
     public function my_plugin_donation_edit(){

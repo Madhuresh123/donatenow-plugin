@@ -33,7 +33,7 @@ class User extends BaseController
     public function donation_btn_2(){
     
             ob_start();
-            require_once $this->plugin_path .'/templates/donationBtn.php';
+            require_once $this->plugin_path .'/templates/wp/donationBtn.php';
             return ob_get_clean();
     
     }
@@ -41,7 +41,7 @@ class User extends BaseController
     public function donation_form_2(){
     
         ob_start();
-        require_once $this->plugin_path .'/templates/donationForm.php';
+        require_once $this->plugin_path .'/templates/wp/donationForm.php';
         return ob_get_clean();
 
     }
@@ -49,7 +49,7 @@ class User extends BaseController
     public function donation_receipt_2(){
     
     ob_start();
-    require_once $this->plugin_path .'/templates/donationReceipt.php';
+    require_once $this->plugin_path .'/templates/wp/donationReceipt.php';
     return ob_get_clean();
 
     }
@@ -57,7 +57,7 @@ class User extends BaseController
     public function volunteer_form(){
     
         ob_start();
-        require_once $this->plugin_path .'/templates/volunteer_form.php';
+        require_once $this->plugin_path .'/templates/wp/volunteer_form.php';
         return ob_get_clean();
     
         }
@@ -65,31 +65,31 @@ class User extends BaseController
     public function contact_form(){
     
             ob_start();
-            require_once $this->plugin_path .'/templates/contact_form.php';
+            require_once $this->plugin_path .'/templates/wp/contact_form.php';
             return ob_get_clean();
         
     }
 
     public function spinnal_form(){
 
-        require_once $this->plugin_path .'/templates/ajax_contact_form.php';
+        require_once $this->plugin_path .'/templates/ajax/ajax_contact_form.php';
     }
 
     public function spinnal_volunteer_form(){
 
-        require_once $this->plugin_path .'/templates/ajax_volunteer_form.php';
+        require_once $this->plugin_path .'/templates/ajax/ajax_volunteer_form.php';
     }
 
     public function func_state(){
-        require_once $this->plugin_path .'/templates/ajax_state.php';
+        require_once $this->plugin_path .'/templates/ajax/ajax_state.php';
     }
 
     public function func_state_search(){
-        require_once $this->plugin_path .'/templates/ajax_state_search.php';
+        require_once $this->plugin_path .'/templates/ajax/ajax_state_search.php';
     }
 
     public function func_city_search(){
-        require_once $this->plugin_path .'/templates/ajax_city_search.php';
+        require_once $this->plugin_path .'/templates/ajax/ajax_city_search.php';
     }
 
 }
