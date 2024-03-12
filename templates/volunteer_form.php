@@ -19,7 +19,6 @@
 <style>
 
 .dropdown-content{
-
   background-color: lightgrey;
 }
 
@@ -174,7 +173,7 @@
   <div class="form-group">
     <label for="volunteer_state">State</label><br>
 
-<input type="text" id="state_input"  class="donor-input" placeholder="Select your state">
+<input type="text" id="state_input"  class="donor-input" placeholder="Enter your state">
 <div id="state_dropdown" class="dropdown-content"></div>
 
   </div>
@@ -182,7 +181,7 @@
   <div class="form-group">
     <label for="volunteer_city">City</label><br>
 
-<input type="text" id="city_input"  class="donor-input" placeholder="Select your city">
+<input type="text" id="city_input"  class="donor-input" placeholder="Select your city" disabled>
 <div id="city_dropdown" class="dropdown-content"></div>
 
 
@@ -249,7 +248,7 @@ jQuery(document).ready(function($) {
   let state_input = $('#state_input');
 
   state_input.keyup(function() {
-    let state = $(this).val();
+    let state = $('#state_input').val();
 
     if (state !== '') {
       let formData = new FormData();
@@ -308,50 +307,46 @@ jQuery(document).ready(function($) {
 
 
 
-jQuery(document).ready(function($){
+// jQuery(document).ready(function($){
 
-      let city_input = $('#city_input');
-      let state_input = $('#state_input');
-
-
-      city_input.keyup(function() {
-              let city = $(this).val();
-              let state = $('#state_input').val();
+//       let city_input = $('#city_input');
+//       let state_input = $('#state_input');
 
 
-              if (city !== '') {
-                let formData = new FormData();
-                formData.append('action', 'city_search');
-                formData.append('city_input', city);
+//       city_input.keyup(function() {
+//               let city = $(this).val();
 
-                $.ajax({
-                  url: ajaxUrl,
-                  type: 'post',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  success: function(response) {
-                    $('#city_dropdown').fadeIn().html(response);
-                  },
-                  error: function(response) {
-                    console.log('Error:', response);
-                  }
-                });
-              } else {
-                $('#city_dropdown').fadeOut().html("");
-              }
-        });
+//               if (city !== '') {
+//                 let formData = new FormData();
+//                 formData.append('action', 'city_search');
+//                 formData.append('city_input', city);
+
+//                 $.ajax({
+//                   url: ajaxUrl,
+//                   type: 'post',
+//                   data: formData,
+//                   processData: false,
+//                   contentType: false,
+//                   success: function(response) {
+//                     $('#city_dropdown').fadeIn().html(response);
+//                   },
+//                   error: function(response) {
+//                     console.log('Error:', response);
+//                   }
+//                 });
+//               } else {
+//                 $('#city_dropdown').fadeOut().html("");
+//               }
+//         });
 
     
-          // Handle click on list item
-  $('#city_dropdown').on('click', 'li', function() {
-    $('#city_input').val($(this).text());
-    $('#city_dropdown').fadeOut();
-  });
+//           // Handle click on list item
+//   $('#city_dropdown').on('click', 'li', function() {
+//     $('#city_input').val($(this).text());
+//     $('#city_dropdown').fadeOut();
+//   });
 
-      
-
-});
+// });
 
 
 // Wait for the DOM to be loaded before running the script
@@ -400,7 +395,7 @@ jQuery(document).ready(function($){
               let volunteer_address_1     =  $('#volunteer_address_1').val();
               let volunteer_address_2     =  $('#volunteer_address_2').val();
               let volunteer_city          =  $('#volunteer_city').val();
-              let volunteer_state         =  $('#state_input').val($(this).text());
+              let volunteer_state         =  $('#state_input').val();
               let volunteer_zip           =  $('#volunteer_zip').val();
               let volunteer_country       =  $('#volunteer_country').val();
               let volunteer_comments      =  $('#volunteer_comments').val();
