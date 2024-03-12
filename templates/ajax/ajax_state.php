@@ -22,13 +22,6 @@ else{
     wp_die();
 }
 
-
-// else{
-//     $query = $wpdb->prepare("SELECT * FROM $wp_districts");
-
-//     $results = $wpdb->get_results($query);
-// }
-
 wp_die();
 
 ?>

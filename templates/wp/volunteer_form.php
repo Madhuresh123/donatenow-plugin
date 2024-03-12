@@ -16,26 +16,6 @@
 
 ?>
 
-<style>
-
-.dropdown-content{
-  background-color: lightgrey;
-}
-
-
-  .dropdown-content > li{
-    list-style: none;
-    cursor: pointer;
-    padding-left:5px;
-  }
-
-  .dropdown-content > li:hover{
-
-    background-color: lightblue;
-  }
-</style>
-
-
 <div class=volunteer-box>
     <div class="donation-form-title"><h2>Volunteer Registration</h2></div>
 
@@ -179,9 +159,9 @@
   </div>
   
   <div class="form-group">
-    <label for="volunteer_city">City</label><br>
+    <label for="volunteer_city">City/district</label><br>
 
-<input type="text" id="city_input"  class="donor-input" placeholder="Select your city" disabled>
+<input type="text" id="city_input"  class="donor-input" placeholder="Select your city/district" disabled>
 <div id="city_dropdown" class="dropdown-content"></div>
 
 
@@ -242,113 +222,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-
-jQuery(document).ready(function($) {
-
-  let state_input = $('#state_input');
-
-  state_input.keyup(function() {
-    let state = $('#state_input').val();
-
-    if (state !== '') {
-      let formData = new FormData();
-      formData.append('action', 'state_search');
-      formData.append('state_input', state);
-
-      $.ajax({
-        url: ajaxUrl,
-        type: 'post',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          $('#state_dropdown').fadeIn().html(response);
-        },
-        error: function(response) {
-          console.log('Error:', response);
-        }
-      });
-    } else {
-      $('#state_dropdown').fadeOut().html("");
-    }
-  });
-
-  // Handle click on list item
-  $('#state_dropdown').on('click', 'li', function() {
-    $('#state_input').val($(this).text());
-    $('#city_input').val("");
-    $('#state_dropdown').fadeOut();
-
-    let state = $(this).val();
-    let formData = new FormData();
-    formData.append('action', 'func_state');
-    formData.append('state_value', state);
-
-    $.ajax({
-      url: ajaxUrl, 
-      type: 'post',
-      data: formData,
-      processData: false,
-      contentType: false, 
-      success: function(response) {
-            $('#city_dropdown').fadeIn().html(response);
-
-            $('#city_dropdown').on('click', 'li', function() {
-                      $('#city_input').val($(this).text());
-                      $('#city_dropdown').fadeOut();
-                  });            
-      },
-      error: function(response) {
-        console.log('Error:',response);
-      }
-    });
-  });
-});
-
-
-
-// jQuery(document).ready(function($){
-
-//       let city_input = $('#city_input');
-//       let state_input = $('#state_input');
-
-
-//       city_input.keyup(function() {
-//               let city = $(this).val();
-
-//               if (city !== '') {
-//                 let formData = new FormData();
-//                 formData.append('action', 'city_search');
-//                 formData.append('city_input', city);
-
-//                 $.ajax({
-//                   url: ajaxUrl,
-//                   type: 'post',
-//                   data: formData,
-//                   processData: false,
-//                   contentType: false,
-//                   success: function(response) {
-//                     $('#city_dropdown').fadeIn().html(response);
-//                   },
-//                   error: function(response) {
-//                     console.log('Error:', response);
-//                   }
-//                 });
-//               } else {
-//                 $('#city_dropdown').fadeOut().html("");
-//               }
-//         });
-
-    
-//           // Handle click on list item
-//   $('#city_dropdown').on('click', 'li', function() {
-//     $('#city_input').val($(this).text());
-//     $('#city_dropdown').fadeOut();
-//   });
-
-// });
-
-
 // Wait for the DOM to be loaded before running the script
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -371,93 +244,4 @@ document.addEventListener('DOMContentLoaded', function () {
     yesOption.addEventListener('change', updateSelectState);
     noOption.addEventListener('change', updateSelectState);
 });
-
-
-</script>
-<script>
-
-jQuery(document).ready(function($){
-    let spinal_volunteer_form = $('#volunteer-form');
-
-
-    spinal_volunteer_form.submit(function(event){
-        event.preventDefault();
-
-              let volunteer_fullname      =  $('#volunteer_fullname').val();
-              let volunteer_email         =  $('#volunteer_email').val();
-              let volunteer_aadhaar       =  $('#volunteer_aadhaar').val();
-              let volunteer_age           =  $('#volunteer_age').val();
-              let volunteer_profession    =  $('#volunteer_profession').val();
-              let volunteer_duration      =  $('#volunteer_duration').val();
-              let volunteer_preferences   =  $('#volunteer_preferences').val();
-              let volunteer_availability  =  $('#volunteer_availability').val();
-              let volunteer_contact       =  $('#volunteer_contact').val();
-              let volunteer_address_1     =  $('#volunteer_address_1').val();
-              let volunteer_address_2     =  $('#volunteer_address_2').val();
-              let volunteer_city          =  $('#volunteer_city').val();
-              let volunteer_state         =  $('#state_input').val();
-              let volunteer_zip           =  $('#volunteer_zip').val();
-              let volunteer_country       =  $('#volunteer_country').val();
-              let volunteer_comments      =  $('#volunteer_comments').val();
-              let myCheckbox      =     $('#myCheckbox').is(':checked');
-
-
-        let formData = new FormData();
-
-        formData.append('action', 'spinnal_volunteer_form');
-        formData.append('volunteer_fullname', volunteer_fullname);
-        formData.append('volunteer_email', volunteer_email);
-        formData.append('volunteer_aadhaar', volunteer_aadhaar);
-        formData.append('volunteer_age', volunteer_age);
-        formData.append('volunteer_profession', volunteer_profession);
-        formData.append('volunteer_duration', volunteer_duration);
-        formData.append('volunteer_preferences', volunteer_preferences);
-        formData.append('volunteer_availability', volunteer_availability);
-        formData.append('volunteer_contact', volunteer_contact);
-        formData.append('volunteer_address_1', volunteer_address_1);
-        formData.append('volunteer_address_2', volunteer_address_2);
-        formData.append('volunteer_city', volunteer_city);
-        formData.append('volunteer_state', volunteer_state);
-        formData.append('volunteer_zip', volunteer_zip);
-        formData.append('volunteer_country', volunteer_country);
-        formData.append('volunteer_comments', volunteer_comments);
-        formData.append('myCheckbox', myCheckbox);
-
-
-        $.ajax({
-          url: ajaxUrl,
-          type: 'post',
-          data: formData,
-          processData: false,
-          contentType: false,
-          success: function(response){
-              if(response === 'success'){
-
-                $('#volunteer-form').css('display','none');
-
-              $('#volunteer-form-result').text('Thank you. Volunteer form submitted successfully').css({
-                    'color': 'green',
-                    'margin-left': '30%'
-                    });
-
-              }else{
-              
-                $('#volunteer-form-result').text('Submission failed. Please try again.').css({
-                    'color': 'red',
-                    'margin-left': '1%'
-                    });      
-                  
-                $('#error-check-box').text('This field is required.').css('color','red');
-              }
-          },
-          error: function(response){
-              $('#volunteer-form-result').text('Submission failed. Please try again.').css('color', 'red');
-          }
-
-        });
-
-    });
-});
-
-
 </script>

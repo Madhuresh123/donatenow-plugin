@@ -158,3 +158,211 @@ jQuery("#spinal-contact-form").validate({
     }
   }
 });
+
+
+//state select option
+jQuery(document).ready(function($) {
+
+  let state_input = $('#state_input');
+
+  state_input.keyup(function() {
+    let state = $('#state_input').val();
+
+    if (state !== '') {
+      let formData = new FormData();
+      formData.append('action', 'state_search');
+      formData.append('state_input', state);
+
+      $.ajax({
+        url: ajaxUrl,
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          $('#state_dropdown').fadeIn().html(response);
+        },
+        error: function(response) {
+          console.log('Error:', response);
+        }
+      });
+    } else {
+      $('#state_dropdown').fadeOut().html("");
+    }
+  });
+
+  // Handle click on list item
+  $('#state_dropdown').on('click', 'li', function() {
+    $('#state_input').val($(this).text());
+    $('#city_input').val("");
+    $('#state_dropdown').fadeOut();
+
+    let state = $(this).val();
+    let formData = new FormData();
+    formData.append('action', 'func_state');
+    formData.append('state_value', state);
+
+    $.ajax({
+      url: ajaxUrl, 
+      type: 'post',
+      data: formData,
+      processData: false,
+      contentType: false, 
+      success: function(response) {
+            $('#city_dropdown').fadeIn().html(response);
+
+            $('#city_dropdown').on('click', 'li', function() {
+                      $('#city_input').val($(this).text());
+                      $('#city_dropdown').fadeOut();
+                  });            
+      },
+      error: function(response) {
+        console.log('Error:',response);
+      }
+    });
+  });
+});
+
+
+//volunteer submit ajax
+jQuery(document).ready(function($){
+  let spinal_volunteer_form = $('#volunteer-form');
+
+
+  spinal_volunteer_form.submit(function(event){
+      event.preventDefault();
+
+            let volunteer_fullname      =  $('#volunteer_fullname').val();
+            let volunteer_email         =  $('#volunteer_email').val();
+            let volunteer_aadhaar       =  $('#volunteer_aadhaar').val();
+            let volunteer_age           =  $('#volunteer_age').val();
+            let volunteer_profession    =  $('#volunteer_profession').val();
+            let volunteer_duration      =  $('#volunteer_duration').val();
+            let volunteer_preferences   =  $('#volunteer_preferences').val();
+            let volunteer_availability  =  $('#volunteer_availability').val();
+            let volunteer_contact       =  $('#volunteer_contact').val();
+            let volunteer_address_1     =  $('#volunteer_address_1').val();
+            let volunteer_address_2     =  $('#volunteer_address_2').val();
+            let volunteer_city          =  $('#volunteer_city').val();
+            let volunteer_state         =  $('#state_input').val();
+            let volunteer_zip           =  $('#volunteer_zip').val();
+            let volunteer_country       =  $('#volunteer_country').val();
+            let volunteer_comments      =  $('#volunteer_comments').val();
+            let myCheckbox      =     $('#myCheckbox').is(':checked');
+
+
+      let formData = new FormData();
+
+      formData.append('action', 'spinnal_volunteer_form');
+      formData.append('volunteer_fullname', volunteer_fullname);
+      formData.append('volunteer_email', volunteer_email);
+      formData.append('volunteer_aadhaar', volunteer_aadhaar);
+      formData.append('volunteer_age', volunteer_age);
+      formData.append('volunteer_profession', volunteer_profession);
+      formData.append('volunteer_duration', volunteer_duration);
+      formData.append('volunteer_preferences', volunteer_preferences);
+      formData.append('volunteer_availability', volunteer_availability);
+      formData.append('volunteer_contact', volunteer_contact);
+      formData.append('volunteer_address_1', volunteer_address_1);
+      formData.append('volunteer_address_2', volunteer_address_2);
+      formData.append('volunteer_city', volunteer_city);
+      formData.append('volunteer_state', volunteer_state);
+      formData.append('volunteer_zip', volunteer_zip);
+      formData.append('volunteer_country', volunteer_country);
+      formData.append('volunteer_comments', volunteer_comments);
+      formData.append('myCheckbox', myCheckbox);
+
+
+      $.ajax({
+        url: ajaxUrl,
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response){
+            if(response === 'success'){
+
+              $('#volunteer-form').css('display','none');
+
+            $('#volunteer-form-result').text('Thank you. Volunteer form submitted successfully').css({
+                  'color': 'green',
+                  'margin-left': '30%'
+                  });
+
+            }else{
+            
+              $('#volunteer-form-result').text('Submission failed. Please try again.').css({
+                  'color': 'red',
+                  'margin-left': '1%'
+                  });      
+                
+              $('#error-check-box').text('This field is required.').css('color','red');
+            }
+        },
+        error: function(response){
+            $('#volunteer-form-result').text('Submission failed. Please try again.').css('color', 'red');
+        }
+
+      });
+
+  });
+});
+
+
+//contact form
+jQuery(document).ready(function($){
+  let spinal_contact_form = $('#spinal-contact-form');
+
+  spinal_contact_form.submit(function(event){
+      event.preventDefault();
+
+      let contact_name = $('#contact_name').val();
+      let contact_email = $('#contact_email').val();
+      let contact_phone = $('#contact_phone').val();
+      let contact_subject = $('#contact_subject').val();
+      let contact_message = $('#contact_message').val();
+
+      let formData = new FormData();
+
+      formData.append('action', 'spinnal_form');
+      formData.append('contact_name', contact_name);
+      formData.append('contact_email', contact_email);
+      formData.append('contact_phone', contact_phone);
+      formData.append('contact_subject', contact_subject);
+      formData.append('contact_message', contact_message);
+
+      $.ajax({
+        url: ajaxUrl,
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response){
+            console.log(response);
+            if(response === 'success'){
+
+              $('#contact_name').val('');
+              $('#contact_email').val('');
+              $('#contact_phone').val('');
+              $('#contact_subject').val('');
+              $('#contact_message').val('');
+
+            $('#contact-form-result').text('Submitted successfully').css('color', 'green');
+
+            }else{
+            
+              $('#contact-form-result').text('Submission failed. Please try again.').css('color', 'red');
+              
+            }
+        },
+        error: function(response){
+            console.log('error');
+            $('#contact-form-result').text('Submission failed. Please try again.').css('color', 'red');
+
+        }
+
+      });
+
+  });
+});
+
