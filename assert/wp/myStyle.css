@@ -260,6 +260,19 @@ position: absolute;
        padding-left: 10px;
 }
 
+.dropdown-wrapper {
+  position: relative;
+}
+
+#state_dropdown , #city_dropdown{
+  position: absolute;
+  z-index: 100;  
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+  width: 100%;
+  max-height: 5rem; 
+  overflow-y: auto; 
+}
+
 .dropdown-content{
   background-color: lightgrey;
 }

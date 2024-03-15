@@ -11,7 +11,7 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_contact_form';
         $contact_message = $_POST['contact_message'];
 
         function noSpecialChars($value) {
-            return preg_match('/^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/', $value);
+            return preg_match('/^[a-zA-Z][a-zA-Z\s]{0,48}[a-zA-Z]$/', $value);
         }
         
         function validEmail($value) {
@@ -19,7 +19,7 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_contact_form';
         }
 
         function validPhone($value) {
-            return preg_match('/^\d{10}$/', $value);
+            return preg_match('/^[1-9]\d{9}$/', $value);
         }
 
     if( !empty($contact_name) && noSpecialChars($contact_name) && !empty($contact_email) && validEmail($contact_email) && !empty($contact_phone) && validPhone($contact_phone)){

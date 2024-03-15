@@ -25,7 +25,8 @@ if (amountId) {
 
 
 jQuery.validator.addMethod("noSpecialChars", function (value, element) {
-  return this.optional(element) || /^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/.test(value); // Requires at least two letters and the first character not being a space
+    return this.optional(element) || /^[a-zA-Z][a-zA-Z\s]{0,48}[a-zA-Z]$/.test(value); // Requires at least two letters and the first character not being a space
+
 });
 
 jQuery.validator.addMethod("validEmail", function (value, element) {
@@ -34,7 +35,7 @@ jQuery.validator.addMethod("validEmail", function (value, element) {
 
 
 jQuery.validator.addMethod("onlyTenDigits", function (value, element) {
-  return this.optional(element) || /^\d{10}$/.test(value); // Allows only exactly 10 digits
+  return this.optional(element) || /^[1-9]\d{9}$/.test(value);
 });
 
 jQuery.validator.addMethod("validPAN", function (value, element) {
@@ -165,10 +166,9 @@ jQuery(document).ready(function($) {
 
   let state_input = $('#state_input');
 
-  state_input.keyup(function() {
+  function searchState(){
     let state = $('#state_input').val();
 
-    if (state !== '') {
       let formData = new FormData();
       formData.append('action', 'state_search');
       formData.append('state_input', state);
@@ -186,16 +186,20 @@ jQuery(document).ready(function($) {
           console.log('Error:', response);
         }
       });
-    } else {
-      $('#state_dropdown').fadeOut().html("");
-    }
-  });
+  }
+
+  state_input.on('focus', searchState);
+  state_input.on('keyup', searchState);
 
   // Handle click on list item
   $('#state_dropdown').on('click', 'li', function() {
-    $('#state_input').val($(this).text());
+
+    let val = $(this).val() === 0 ? "" : $(this).text();
+    $('#state_input').val(val);
     $('#city_input').val("");
     $('#state_dropdown').fadeOut();
+
+
 
     let state = $(this).val();
     let formData = new FormData();
@@ -209,25 +213,74 @@ jQuery(document).ready(function($) {
       processData: false,
       contentType: false, 
       success: function(response) {
-            $('#city_dropdown').fadeIn().html(response);
 
-            $('#city_dropdown').on('click', 'li', function() {
-                      $('#city_input').val($(this).text());
-                      $('#city_dropdown').fadeOut();
-                  });            
+        let city_input = $('#city_input');
+        let city_dropdown = $('#city_dropdown');
+    
+        function searchCity() {
+            let city = $(this).val().toLowerCase();
+                // Filter the city dropdown based on the input text
+                city_dropdown.html(response); // Assuming response contains all city options
+                city_dropdown.find('li').each(function() {
+                    if ($(this).text().toLowerCase().indexOf(city) !== -1) {
+                        $(this).show(); // Show the list item if it contains the input text
+                    } else {
+                        $(this).hide();
+                    }
+                });
+    
+                // If there are no matching cities, display "no city found"
+                if (city_dropdown.find('li:visible').length === 0) {
+                    city_dropdown.html('<li value="0">no city found</li>');
+                }
+
+            city_dropdown.fadeIn();
+        };
+
+        city_input.on('focus', searchCity);
+        city_input.on('keyup', searchCity);
+    
+        // Hide the dropdown when input loses focus
+        city_input.focusout(function() {
+            city_dropdown.fadeOut();
+            $('#city_input').val("");
+        });
+    
+        // Show the dropdown when input gains focus
+        city_input.focusin(function() {
+            if ($(this).val().trim() !== '') {
+                city_dropdown.fadeIn();
+            }
+        });
+    
+        // Handle click on dropdown items
+        city_dropdown.on('click', 'li', function() {
+
+          let sel = $(this).val() === 0 ? "" : $(this).text();
+            $('#city_input').val(sel);
+            $('#city_dropdown').fadeOut();
+
+        });
+
+
       },
       error: function(response) {
         console.log('Error:',response);
       }
     });
   });
+
+  $('#state_input').focusout(function() {
+    $('#state_dropdown').fadeOut();
+    $('#state_input').val("");
+  });
+
 });
 
 
 //volunteer submit ajax
 jQuery(document).ready(function($){
   let spinal_volunteer_form = $('#volunteer-form');
-
 
   spinal_volunteer_form.submit(function(event){
       event.preventDefault();
@@ -295,7 +348,7 @@ jQuery(document).ready(function($){
                   'color': 'red',
                   'margin-left': '1%'
                   });      
-                
+
               $('#error-check-box').text('This field is required.').css('color','red');
             }
         },

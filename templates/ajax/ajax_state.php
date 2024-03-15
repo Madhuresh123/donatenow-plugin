@@ -12,7 +12,6 @@ if($state_value){
     $results = $wpdb->get_results($query);
 
     foreach ($results as $row) {
-        // echo '<option value="' . $row->mid . '">' . $row->districts . '</option>';
         echo '<li value="' . $row->mid . '">' . $row->districts . '</li>';
     }
     

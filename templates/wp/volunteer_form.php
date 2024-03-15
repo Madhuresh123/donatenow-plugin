@@ -153,23 +153,23 @@
   <div class="form-group">
     <label for="volunteer_state">State</label><br>
 
-<input type="text" id="state_input"  class="donor-input" placeholder="Enter your state">
-<div id="state_dropdown" class="dropdown-content"></div>
+    <div class="dropdown-wrapper">
+      <input type="text" id="state_input"  class="donor-input" placeholder="Enter your state">
+      <div id="state_dropdown" class="dropdown-content"></div>
+      </div>
 
   </div>
   
   <div class="form-group">
     <label for="volunteer_city">City/district</label><br>
 
-<input type="text" id="city_input"  class="donor-input" placeholder="Select your city/district" disabled>
-<div id="city_dropdown" class="dropdown-content"></div>
-
+      <div class="dropdown-wrapper">
+      <input type="text" id="city_input"  class="donor-input" placeholder="Select your city/district">
+      <div id="city_dropdown" class="dropdown-content"></div>
+      </div>
 
   </div>
 
-
-
-  
     </div>
 
   <div class="first-info">
@@ -243,5 +243,59 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add event listeners to the radio buttons to trigger the state update function
     yesOption.addEventListener('change', updateSelectState);
     noOption.addEventListener('change', updateSelectState);
+});
+</script>
+
+<script>
+
+jQuery(document).ready(function($) {
+
+let city_input = $('#city_input');
+
+// Function to handle the AJAX request for city search
+function searchCity() {
+  let city = city_input.val();
+
+  if ($('#state_input').val() === '') { 
+
+      let formData = new FormData();
+      formData.append('action', 'city_search');
+      formData.append('city_input', city);
+
+      $.ajax({
+        url: ajaxUrl,
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          $('#city_dropdown').fadeIn().html(response);
+        },
+        error: function(response) {
+          console.log('Error:', response);
+        }
+      });
+
+    $('#city_input').focusout(function() {
+    $('#city_dropdown').fadeOut();
+    $('#city_input').val("");
+  });
+
+  }
+
+}
+
+// Attach the searchCity function to both keyup and focus events
+city_input.on('focus', searchCity);
+city_input.on('keyup', searchCity);
+
+// Handle click on list item in the dropdown
+$('#city_dropdown').on('click', 'li', function() {
+
+  let text = $(this).val() === 0 ? "" : $(this).text();
+  $('#city_input').val(text);
+  $('#city_dropdown').fadeOut(); // Hide the dropdown
+});
+
 });
 </script>

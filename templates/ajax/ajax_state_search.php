@@ -20,6 +20,6 @@ if($results){
     wp_die();
 }
 else{
-    echo '<li> No state found </li>';
+    echo '<li value=0> No state found </li>';
     wp_die();
 }

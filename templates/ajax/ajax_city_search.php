@@ -9,6 +9,7 @@ $city_input = $_POST['city_input'];
 
 $query = $wpdb->prepare("SELECT * FROM $wp_districts WHERE districts LIKE %s", $city_input . '%');
 
+
 $results = $wpdb->get_results($query);
 
 
@@ -20,6 +21,6 @@ if($results){
     wp_die();
 }
 else{
-    echo '<li> No state found </li>';
+    echo '<li value=0 > No city found </li>';
     wp_die();
 }
