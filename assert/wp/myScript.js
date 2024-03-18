@@ -280,6 +280,7 @@ jQuery(document).ready(function($) {
 
 //volunteer submit ajax
 jQuery(document).ready(function($){
+
   let spinal_volunteer_form = $('#volunteer-form');
 
   spinal_volunteer_form.submit(function(event){
@@ -343,13 +344,17 @@ jQuery(document).ready(function($){
                   });
 
             }else{
-            
+              console.log(response);
+              if(response === 'false'){
+                $('#error-check-box').text('This field is required.').css('color','red');
+              }else{
+                $('#error-check-box').text('');
+              }
+
               $('#volunteer-form-result').text('Submission failed. Please try again.').css({
                   'color': 'red',
                   'margin-left': '1%'
-                  });      
-
-              $('#error-check-box').text('This field is required.').css('color','red');
+                  });                       
             }
         },
         error: function(response){

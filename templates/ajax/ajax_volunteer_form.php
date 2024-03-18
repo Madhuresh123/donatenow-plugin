@@ -48,13 +48,22 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_volunteer_form';
         && !empty($volunteer_email) && validEmail($volunteer_email)
         && !empty($volunteer_contact) && validPhone($volunteer_contact) 
         && !empty($volunteer_aadhaar) && isValidAadhaar($volunteer_aadhaar)
-        && !empty($volunteer_zip) && validZipcode($volunteer_zip)
         && $myCheckbox=== 'true'){  
 
-        echo 'success';
+        if(!empty($volunteer_zip)  && !validZipcode($volunteer_zip)){
+            echo 'error_zip';
+        }else{
+            echo 'success';
+        }
         
     }else{
-        echo 'error';
+
+        if($myCheckbox === 'false'){
+            echo 'false';
+        }else{
+            echo 'error';
+        }
+
     }
 
 wp_die();
