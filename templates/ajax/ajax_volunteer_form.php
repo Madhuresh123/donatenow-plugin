@@ -9,6 +9,7 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_volunteer_form';
         $volunteer_aadhaar = $_POST['volunteer_aadhaar'];
         $volunteer_age = $_POST['volunteer_age'];
         $volunteer_profession = $_POST['volunteer_profession'];
+        $option1 = $_POST['option1'];
         $volunteer_duration = $_POST['volunteer_duration'];
         $volunteer_preferences = $_POST['volunteer_preferences'];
         $volunteer_availability = $_POST['volunteer_availability'];
@@ -52,7 +53,11 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_volunteer_form';
 
         if(!empty($volunteer_zip)  && !validZipcode($volunteer_zip)){
             echo 'error_zip';
-        }else{
+        }
+        else if($option1 === 'true' && $volunteer_duration === 'null' ){
+            echo 'duration_error';
+        }
+        else{
             echo 'success';
         }
         

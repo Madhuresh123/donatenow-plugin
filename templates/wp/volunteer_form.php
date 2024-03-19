@@ -75,7 +75,7 @@
 
     <p><strong>Do you have any prior volunteer experience?</strong></p>
 
-    <input type="radio" id="option1" name="volunteer_experience" value="Yes">
+    <input type="radio" id="option1" name="volunteer_experience" value="yes">
     <label for="option1">Yes</label><br>
 
     <input type="radio" id="option2" name="volunteer_experience" value="No" checked>
@@ -101,6 +101,7 @@
     <option value="4">4 Years</option>
     <option value="5">5 Years</option>
 </select>
+<div id="error-duration"></div>
   </div>
   <div class="form-group">
     <label for="volunteer_preferences">Volunteer Preferences</label><br>

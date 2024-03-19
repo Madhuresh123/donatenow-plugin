@@ -291,6 +291,7 @@ jQuery(document).ready(function($){
             let volunteer_aadhaar       =  $('#volunteer_aadhaar').val();
             let volunteer_age           =  $('#volunteer_age').val();
             let volunteer_profession    =  $('#volunteer_profession').val();
+            let option1                 =  $('#option1').is(':checked');
             let volunteer_duration      =  $('#volunteer_duration').val();
             let volunteer_preferences   =  $('#volunteer_preferences').val();
             let volunteer_availability  =  $('#volunteer_availability').val();
@@ -302,7 +303,7 @@ jQuery(document).ready(function($){
             let volunteer_zip           =  $('#volunteer_zip').val();
             let volunteer_country       =  $('#volunteer_country').val();
             let volunteer_comments      =  $('#volunteer_comments').val();
-            let myCheckbox      =     $('#myCheckbox').is(':checked');
+            let myCheckbox              =  $('#myCheckbox').is(':checked');
 
 
       let formData = new FormData();
@@ -313,6 +314,7 @@ jQuery(document).ready(function($){
       formData.append('volunteer_aadhaar', volunteer_aadhaar);
       formData.append('volunteer_age', volunteer_age);
       formData.append('volunteer_profession', volunteer_profession);
+      formData.append('option1', option1);
       formData.append('volunteer_duration', volunteer_duration);
       formData.append('volunteer_preferences', volunteer_preferences);
       formData.append('volunteer_availability', volunteer_availability);
@@ -345,6 +347,13 @@ jQuery(document).ready(function($){
 
             }else{
               console.log(response);
+
+              if(response === 'duration_error'){
+                $('#error-duration').text('This field is required.').css('color','red');
+              }else{
+                $('#error-duration').text('');
+              } 
+
               if(response === 'false'){
                 $('#error-check-box').text('This field is required.').css('color','red');
               }else{
