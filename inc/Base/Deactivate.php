@@ -22,7 +22,16 @@ class Deactivate
     $wp_districts = $table_prefix.'districts';
 
     $q = "TRUNCATE `$wp_districts`";
-    // $q = "DROP TABLE `$wp_donation`;";
+    $wpdb->query($q);
+
+    $wp_volunteer = $table_prefix.'spiral_volunteer_form';
+
+    $q = "TRUNCATE `$wp_volunteer`";
+    $wpdb->query($q);
+
+    $wp_contact = $table_prefix.'spiral_contact_form';
+
+    $q = "TRUNCATE `$wp_contact`";
     $wpdb->query($q);
     }
 }

@@ -298,7 +298,7 @@ jQuery(document).ready(function($){
             let volunteer_contact       =  $('#volunteer_contact').val();
             let volunteer_address_1     =  $('#volunteer_address_1').val();
             let volunteer_address_2     =  $('#volunteer_address_2').val();
-            let volunteer_city          =  $('#volunteer_city').val();
+            let volunteer_city          =  $('#city_input').val();
             let volunteer_state         =  $('#state_input').val();
             let volunteer_zip           =  $('#volunteer_zip').val();
             let volunteer_country       =  $('#volunteer_country').val();

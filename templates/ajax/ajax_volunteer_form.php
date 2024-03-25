@@ -2,7 +2,7 @@
 
 global $wpdb, $table_prefix;
 
-$wp_spiral_contact_form = $table_prefix . 'spiral_volunteer_form';
+$wp_spiral_volunteer_form  = $table_prefix . 'spiral_volunteer_form';
 
         $volunteer_fullname = $_POST['volunteer_fullname'];
         $volunteer_email = $_POST['volunteer_email'];
@@ -25,11 +25,13 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_volunteer_form';
 
 
         function noSpecialChars($value) {
-            return preg_match('/^[a-zA-Z][a-zA-Z\s]{0,48}[a-zA-Z]$/', $value);
+            $flag = preg_match('/^[a-zA-Z][a-zA-Z\s]{0,48}[a-zA-Z]$/', $value);
+            return $flag==1 ? true : false;
         }
         
         function validEmail($value) {
-            return preg_match('/^[a-z]+\d*@(?:gmail|yahoo|outlook)\.com$|^[a-z][a-z0-9._]*@(?:gmail|yahoo|outlook)\.com$/', $value);
+            $flag = preg_match('/^[a-z]+\d*@(?:gmail|yahoo|outlook)\.com$|^[a-z][a-z0-9._]*@(?:gmail|yahoo|outlook)\.com$/', $value);
+            return $flag==1 ? true : false;
         }
 
         function validPhone($value) {
@@ -58,7 +60,36 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_volunteer_form';
             echo 'duration_error';
         }
         else{
-            echo 'success';
+
+            $volunteer_form_data = array(
+                'name' => $volunteer_fullname,
+                'email' =>  $volunteer_email,
+                'aadhaar' => $volunteer_aadhaar,
+                'age' => $volunteer_age,
+                'profession' => $volunteer_profession,
+                'duration' => $volunteer_duration,
+                'preferences' => $volunteer_preferences,
+                'availability' => $volunteer_availability,
+                'contact' => $volunteer_contact,
+                'address_1' => $volunteer_address_1,
+                'address_2' => $volunteer_address_2,
+                'city' => $volunteer_city ,
+                'state' => $volunteer_state,
+                'zip' => $volunteer_zip,
+                'country' => $volunteer_country,
+                'comments' =>  $volunteer_comments,
+                'date' => current_time('mysql')
+            );
+        
+            $isSubmit =  $wpdb->insert($wp_spiral_volunteer_form,$volunteer_form_data);
+
+            if($isSubmit){
+                echo 'success';
+                exit;
+            }else{
+                echo 'data submition error';
+            }
+
         }
         
     }else{
@@ -71,4 +102,4 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_volunteer_form';
 
     }
 
-wp_die();
+// wp_die();

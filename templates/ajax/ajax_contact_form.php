@@ -34,7 +34,7 @@ $wp_spiral_contact_form = $table_prefix . 'spiral_contact_form';
             'date' => current_time('mysql')
         );
     
-        $isSubmit = $wpdb->insert($wp_spiral_contact_form,$contact_form_data);
+        $wpdb->insert($wp_spiral_contact_form,$contact_form_data);
 
         if($isSubmit){
             echo 'success';
