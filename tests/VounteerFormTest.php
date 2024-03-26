@@ -57,4 +57,83 @@ class VounteerFormTest extends TestCase
         $this->assertFalse(validEmail("madhuresh1221ranjan@dsds.com"));
 
     }
+
+    public function testisValidAadhaar()
+    {
+        // Test with valid input
+        $this->assertTrue(isValidAadhaar("609878985634"));
+
+        $this->assertFalse(isValidAadhaar("109878985634"));
+
+        $this->assertFalse(isValidAadhaar("6098 7898 5634"));
+
+        $this->assertFalse(isValidAadhaar(" 609878985634"));
+
+        $this->assertFalse(isValidAadhaar("609878985634 "));
+    }
+
+    public function testvalidPhone()
+    {
+        // Test with valid input
+        $this->assertTrue(validPhone("8987898856"));
+
+        $this->assertFalse(validPhone("9189877677787"));
+
+        $this->assertFalse(validPhone(" 8098789856"));
+
+        $this->assertFalse(validPhone("8098789856 "));
+
+        $this->assertFalse(validPhone("0898789887"));
+
+    }
+
+    public function testvalidZipcode()
+    {
+        // Test with valid input
+        $this->assertTrue(validZipcode("500032"));
+
+        $this->assertFalse(validZipcode(" 500032"));
+
+        $this->assertFalse(validZipcode("500032 "));
+
+    }
+
+    public function testProcessDataWithValidData()
+    {
+        $formData = [
+            'volunteer_fullname' => 'John Doe',
+            'volunteer_email' => 'john@gmail.com',
+            'volunteer_aadhaar' => '609878985634',
+            'volunteer_age' => '',
+            'volunteer_profession' => '',
+            'option1' => '',
+            'volunteer_duration' => '',
+            'volunteer_preferences' => '',
+            'volunteer_availability' => '',
+            'volunteer_contact' => '8789878865',
+            'volunteer_address_1' => '',
+            'volunteer_address_2' => '',
+            'volunteer_city' => '' ,
+            'volunteer_state' => '',
+            'volunteer_zip' => '',
+            'volunteer_country' => '',
+            'volunteer_comments' =>  '',
+            'myCheckbox' => 'true',
+        ];
+
+           // Start output buffering to capture echoed messages
+            ob_start();
+    
+            // Call the function
+            processData($formData);
+            
+            // Get the contents of the output buffer
+            $output = ob_get_clean();
+
+            // Assert against the echoed message
+            $this->assertEquals('success', $output);
+
+            ob_end_clean();
+
+    }
 }

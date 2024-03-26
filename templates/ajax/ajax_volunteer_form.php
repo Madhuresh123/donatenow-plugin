@@ -1,29 +1,5 @@
 <?php
 
-global $wpdb, $table_prefix;
-
-$wp_spiral_volunteer_form  = $table_prefix . 'spiral_volunteer_form';
-
-        $volunteer_fullname = $_POST['volunteer_fullname'];
-        $volunteer_email = $_POST['volunteer_email'];
-        $volunteer_aadhaar = $_POST['volunteer_aadhaar'];
-        $volunteer_age = $_POST['volunteer_age'];
-        $volunteer_profession = $_POST['volunteer_profession'];
-        $option1 = $_POST['option1'];
-        $volunteer_duration = $_POST['volunteer_duration'];
-        $volunteer_preferences = $_POST['volunteer_preferences'];
-        $volunteer_availability = $_POST['volunteer_availability'];
-        $volunteer_contact = $_POST['volunteer_contact'];
-        $volunteer_address_1 = $_POST['volunteer_address_1'];   
-        $volunteer_address_2 = $_POST['volunteer_address_2'];
-        $volunteer_city = $_POST['volunteer_city'];
-        $volunteer_state = $_POST['volunteer_state'];
-        $volunteer_zip = $_POST['volunteer_zip'];
-        $volunteer_country = $_POST['volunteer_country'];
-        $volunteer_comments = $_POST['volunteer_comments'];
-        $myCheckbox = $_POST['myCheckbox'];
-
-
         function noSpecialChars($value) {
             $flag = preg_match('/^[a-zA-Z][a-zA-Z\s]{0,48}[a-zA-Z]$/', $value);
             return $flag==1 ? true : false;
@@ -35,23 +11,51 @@ $wp_spiral_volunteer_form  = $table_prefix . 'spiral_volunteer_form';
         }
 
         function validPhone($value) {
-            return preg_match('/^[1-9]\d{9}$/', $value);
+            $flag = preg_match('/^[1-9]\d{9}$/', $value);
+            return $flag==1 ? true : false;
+
         }
 
         function isValidAadhaar($value) {
-            return preg_match('/^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/', $value);
+            $flag = preg_match('/^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/', $value);
+            return $flag==1 ? true : false;
         }
 
         function validZipcode($value) {
-            return preg_match('/^[1-9]\d{5}$/', $value);
+            $flag = preg_match('/^[1-9]\d{5}$/', $value);
+            return $flag==1 ? true : false;
         }
-      
 
-    if( !empty($volunteer_fullname) && noSpecialChars($volunteer_fullname) 
-        && !empty($volunteer_email) && validEmail($volunteer_email)
-        && !empty($volunteer_contact) && validPhone($volunteer_contact) 
-        && !empty($volunteer_aadhaar) && isValidAadhaar($volunteer_aadhaar)
-        && $myCheckbox=== 'true'){  
+    function processData($formaData){
+
+        global $wpdb, $table_prefix;
+
+        $wp_spiral_volunteer_form  = $table_prefix . 'spiral_volunteer_form';
+
+        $volunteer_fullname =  $formaData['volunteer_fullname'];
+        $volunteer_email = $formaData['volunteer_email'];
+        $volunteer_aadhaar = $formaData['volunteer_aadhaar'];
+        $volunteer_age = $formaData['volunteer_age'];
+        $volunteer_profession = $formaData['volunteer_profession'];
+        $option1 = $formaData['option1'];
+        $volunteer_duration = $formaData['volunteer_duration'];
+        $volunteer_preferences = $formaData['volunteer_preferences'];
+        $volunteer_availability = $formaData['volunteer_availability'];
+        $volunteer_contact = $formaData['volunteer_contact'];
+        $volunteer_address_1 = $formaData['volunteer_address_1'];   
+        $volunteer_address_2 = $formaData['volunteer_address_2'];
+        $volunteer_city = $formaData['volunteer_city'];
+        $volunteer_state = $formaData['volunteer_state'];
+        $volunteer_zip = $formaData['volunteer_zip'];
+        $volunteer_country = $formaData['volunteer_country'];
+        $volunteer_comments = $formaData['volunteer_comments'];
+        $myCheckbox = $formaData['myCheckbox'];
+
+        if( !empty($volunteer_fullname) && noSpecialChars($volunteer_fullname) 
+                && !empty($volunteer_email) && validEmail($volunteer_email)
+                && !empty($volunteer_contact) && validPhone($volunteer_contact) 
+                && !empty($volunteer_aadhaar) && isValidAadhaar($volunteer_aadhaar)
+                && $myCheckbox=== 'true'){  
 
         if(!empty($volunteer_zip)  && !validZipcode($volunteer_zip)){
             echo 'error_zip';
@@ -101,5 +105,9 @@ $wp_spiral_volunteer_form  = $table_prefix . 'spiral_volunteer_form';
         }
 
     }
+
+    }
+
+processData($_POST);
 
 // wp_die();
