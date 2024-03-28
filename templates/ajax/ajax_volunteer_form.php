@@ -26,37 +26,35 @@
             return $flag==1 ? true : false;
         }
 
-    function processData($formaData){
-
-        global $wpdb, $table_prefix;
-
+    function processData($formData, $wpdb){
+        global $table_prefix;
         $wp_spiral_volunteer_form  = $table_prefix . 'spiral_volunteer_form';
 
-        $volunteer_fullname =  $formaData['volunteer_fullname'];
-        $volunteer_email = $formaData['volunteer_email'];
-        $volunteer_aadhaar = $formaData['volunteer_aadhaar'];
-        $volunteer_age = $formaData['volunteer_age'];
-        $volunteer_profession = $formaData['volunteer_profession'];
-        $option1 = $formaData['option1'];
-        $volunteer_duration = $formaData['volunteer_duration'];
-        $volunteer_preferences = $formaData['volunteer_preferences'];
-        $volunteer_availability = $formaData['volunteer_availability'];
-        $volunteer_contact = $formaData['volunteer_contact'];
-        $volunteer_address_1 = $formaData['volunteer_address_1'];   
-        $volunteer_address_2 = $formaData['volunteer_address_2'];
-        $volunteer_city = $formaData['volunteer_city'];
-        $volunteer_state = $formaData['volunteer_state'];
-        $volunteer_zip = $formaData['volunteer_zip'];
-        $volunteer_country = $formaData['volunteer_country'];
-        $volunteer_comments = $formaData['volunteer_comments'];
-        $myCheckbox = $formaData['myCheckbox'];
-
+        $volunteer_fullname = isset($formData['volunteer_fullname']) ? $formData['volunteer_fullname'] : '';
+        $volunteer_email = isset($formData['volunteer_email']) ? $formData['volunteer_email'] : '';
+        $volunteer_aadhaar = isset($formData['volunteer_aadhaar']) ? $formData['volunteer_aadhaar'] : '';
+        $volunteer_age = isset($formData['volunteer_age']) ? $formData['volunteer_age'] : '';
+        $volunteer_profession = isset($formData['volunteer_profession']) ? $formData['volunteer_profession'] : '';
+        $option1 = isset($formData['option1']) ? $formData['option1'] : '';
+        $volunteer_duration = isset($formData['volunteer_duration']) ? $formData['volunteer_duration'] : '';
+        $volunteer_preferences = isset($formData['volunteer_preferences']) ? $formData['volunteer_preferences'] : '';
+        $volunteer_availability = isset($formData['volunteer_availability']) ? $formData['volunteer_availability'] : '';
+        $volunteer_contact = isset($formData['volunteer_contact']) ? $formData['volunteer_contact'] : '';
+        $volunteer_address_1 = isset($formData['volunteer_address_1']) ? $formData['volunteer_address_1'] : '';
+        $volunteer_address_2 = isset($formData['volunteer_address_2']) ? $formData['volunteer_address_2'] : '';
+        $volunteer_city = isset($formData['volunteer_city']) ? $formData['volunteer_city'] : '';
+        $volunteer_state = isset($formData['volunteer_state']) ? $formData['volunteer_state'] : '';
+        $volunteer_zip = isset($formData['volunteer_zip']) ? $formData['volunteer_zip'] : '';
+        $volunteer_country = isset($formData['volunteer_country']) ? $formData['volunteer_country'] : '';
+        $volunteer_comments = isset($formData['volunteer_comments']) ? $formData['volunteer_comments'] : '';
+        $myCheckbox = isset($formData['myCheckbox']) ? $formData['myCheckbox'] : '';
+    
         if( !empty($volunteer_fullname) && noSpecialChars($volunteer_fullname) 
                 && !empty($volunteer_email) && validEmail($volunteer_email)
                 && !empty($volunteer_contact) && validPhone($volunteer_contact) 
                 && !empty($volunteer_aadhaar) && isValidAadhaar($volunteer_aadhaar)
                 && $myCheckbox=== 'true'){  
-
+    
         if(!empty($volunteer_zip)  && !validZipcode($volunteer_zip)){
             echo 'error_zip';
         }
@@ -64,7 +62,7 @@
             echo 'duration_error';
         }
         else{
-
+    
             $volunteer_form_data = array(
                 'name' => $volunteer_fullname,
                 'email' =>  $volunteer_email,
@@ -84,30 +82,29 @@
                 'comments' =>  $volunteer_comments,
                 'date' => current_time('mysql')
             );
-        
+    
             $isSubmit =  $wpdb->insert($wp_spiral_volunteer_form,$volunteer_form_data);
-
-            if($isSubmit){
+    
+            // if($isSubmit){
                 echo 'success';
-                exit;
-            }else{
-                echo 'data submition error';
-            }
-
+            // }else{
+            //     echo 'data submission error';
+            // }
+    
         }
         
     }else{
-
+    
         if($myCheckbox === 'false'){
             echo 'false';
         }else{
             echo 'error';
         }
-
+    
     }
 
     }
 
-processData($_POST);
+global $wpdb;
+processData($_POST,$wpdb);
 
-// wp_die();

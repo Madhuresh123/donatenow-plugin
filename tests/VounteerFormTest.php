@@ -2,11 +2,22 @@
 
 require_once dirname(__FILE__,2) . '/templates/ajax/ajax_volunteer_form.php';
 
+
 use PHPUnit\Framework\TestCase;
+
+interface DatabaseInterface {
+    public function insert($table, $data);
+  }
+
+  function current_time( $type = 'mysql' ) {
+    return '2024-03-28 18:10:00'; // Fixed time for testing
+}
+
 
 class VounteerFormTest extends TestCase
 {
 
+    //test1
     public function testNoSpecialChars()
     {
         // Test with valid input
@@ -35,6 +46,7 @@ class VounteerFormTest extends TestCase
 
     }
 
+    //test2
     public function testvalidEmail()
     {
         // Test with valid input
@@ -58,6 +70,7 @@ class VounteerFormTest extends TestCase
 
     }
 
+    //test3
     public function testisValidAadhaar()
     {
         // Test with valid input
@@ -72,6 +85,7 @@ class VounteerFormTest extends TestCase
         $this->assertFalse(isValidAadhaar("609878985634 "));
     }
 
+    //test4
     public function testvalidPhone()
     {
         // Test with valid input
@@ -87,6 +101,7 @@ class VounteerFormTest extends TestCase
 
     }
 
+    //test5
     public function testvalidZipcode()
     {
         // Test with valid input
@@ -98,42 +113,301 @@ class VounteerFormTest extends TestCase
 
     }
 
-    public function testProcessDataWithValidData()
-    {
-        $formData = [
+    //test6
+    public function test_processData_validData_success() {
+
+       
+        $formData = array(
             'volunteer_fullname' => 'John Doe',
-            'volunteer_email' => 'john@gmail.com',
-            'volunteer_aadhaar' => '609878985634',
+            'volunteer_email' => 'john.doe@gmail.com',
+            'volunteer_contact' => '9890989987',
+            'volunteer_aadhaar' => '678989876787',
             'volunteer_age' => '',
             'volunteer_profession' => '',
-            'option1' => '',
-            'volunteer_duration' => '',
+            'option1' => '', 
+            'volunteer_duration' => '', 
             'volunteer_preferences' => '',
             'volunteer_availability' => '',
-            'volunteer_contact' => '8789878865',
             'volunteer_address_1' => '',
             'volunteer_address_2' => '',
-            'volunteer_city' => '' ,
+            'volunteer_city' => '',
             'volunteer_state' => '',
-            'volunteer_zip' => '',
+            'volunteer_zip' => '', 
             'volunteer_country' => '',
-            'volunteer_comments' =>  '',
+            'volunteer_comments' => '',
             'myCheckbox' => 'true',
-        ];
+        );
 
-           // Start output buffering to capture echoed messages
-            ob_start();
-    
-            // Call the function
-            processData($formData);
-            
-            // Get the contents of the output buffer
-            $output = ob_get_clean();
+        $mockedDb = $this->createMock('DatabaseInterface');
 
-            // Assert against the echoed message
-            $this->assertEquals('success', $output);
+        ob_start();
+        processData($formData,$mockedDb);
+        $result = ob_get_clean();
 
-            ob_end_clean();
-
+        $this->assertEquals('success', $result);
     }
+
+    //test7
+    public function test_processData_checkbox_false() {
+        
+        $formData = array(
+            'volunteer_fullname' => 'John Doe',
+            'volunteer_email' => 'john.doe@gmail.com',
+            'volunteer_contact' => '9890989987',
+            'volunteer_aadhaar' => '678989876787',
+            'volunteer_age' => '',
+            'volunteer_profession' => '',
+            'option1' => '', 
+            'volunteer_duration' => '', 
+            'volunteer_preferences' => '',
+            'volunteer_availability' => '',
+            'volunteer_address_1' => '',
+            'volunteer_address_2' => '',
+            'volunteer_city' => '',
+            'volunteer_state' => '',
+            'volunteer_zip' => '', 
+            'volunteer_country' => '',
+            'volunteer_comments' => '',
+            'myCheckbox' => 'false',
+        );
+
+        $mockedDb = $this->createMock('DatabaseInterface');
+
+        ob_start();
+        processData($formData,$mockedDb);
+        $result = ob_get_clean();
+
+        $this->assertEquals('false', $result);
+    }
+
+     //test8
+     public function test_processData_Name_missing() {
+        
+        $formData = array(
+            'volunteer_fullname' => '',
+            'volunteer_email' => 'john.doe@gmail.com',
+            'volunteer_contact' => '9890989987',
+            'volunteer_aadhaar' => '678989876787',
+            'volunteer_age' => '',
+            'volunteer_profession' => '',
+            'option1' => '', 
+            'volunteer_duration' => '', 
+            'volunteer_preferences' => '',
+            'volunteer_availability' => '',
+            'volunteer_address_1' => '',
+            'volunteer_address_2' => '',
+            'volunteer_city' => '',
+            'volunteer_state' => '',
+            'volunteer_zip' => '', 
+            'volunteer_country' => '',
+            'volunteer_comments' => '',
+            'myCheckbox' => 'true',
+        );
+
+        $mockedDb = $this->createMock('DatabaseInterface');
+
+        ob_start();
+        processData($formData,$mockedDb);
+        $result = ob_get_clean();
+
+        $this->assertEquals('error', $result);
+    }
+
+    //test9
+    public function test_processData_email_missing() {
+        
+        $formData = array(
+            'volunteer_fullname' => 'Jhone',
+            'volunteer_email' => '',
+            'volunteer_contact' => '9890989987',
+            'volunteer_aadhaar' => '678989876787',
+            'volunteer_age' => '',
+            'volunteer_profession' => '',
+            'option1' => '', 
+            'volunteer_duration' => '', 
+            'volunteer_preferences' => '',
+            'volunteer_availability' => '',
+            'volunteer_address_1' => '',
+            'volunteer_address_2' => '',
+            'volunteer_city' => '',
+            'volunteer_state' => '',
+            'volunteer_zip' => '', 
+            'volunteer_country' => '',
+            'volunteer_comments' => '',
+            'myCheckbox' => 'true',
+        );
+
+        $mockedDb = $this->createMock('DatabaseInterface');
+
+        ob_start();
+        processData($formData,$mockedDb);
+        $result = ob_get_clean();
+
+        $this->assertEquals('error', $result);
+    }
+
+    //test10
+    public function test_processData_contact_missing() {
+        
+        $formData = array(
+            'volunteer_fullname' => 'Jhone',
+            'volunteer_email' => 'jone@gmail.com',
+            'volunteer_contact' => '',
+            'volunteer_aadhaar' => '678989876787',
+            'volunteer_age' => '',
+            'volunteer_profession' => '',
+            'option1' => '', 
+            'volunteer_duration' => '', 
+            'volunteer_preferences' => '',
+            'volunteer_availability' => '',
+            'volunteer_address_1' => '',
+            'volunteer_address_2' => '',
+            'volunteer_city' => '',
+            'volunteer_state' => '',
+            'volunteer_zip' => '', 
+            'volunteer_country' => '',
+            'volunteer_comments' => '',
+            'myCheckbox' => 'true',
+        );
+
+        $mockedDb = $this->createMock('DatabaseInterface');
+
+        ob_start();
+        processData($formData,$mockedDb);
+        $result = ob_get_clean();
+
+        $this->assertEquals('error', $result);
+    }
+
+        //test11
+        public function test_processData_aadhaar_missing() {
+        
+            $formData = array(
+                'volunteer_fullname' => 'Jhone',
+                'volunteer_email' => 'jone@gmail.com',
+                'volunteer_contact' => '9898787767',
+                'volunteer_aadhaar' => '',
+                'volunteer_age' => '',
+                'volunteer_profession' => '',
+                'option1' => '', 
+                'volunteer_duration' => '', 
+                'volunteer_preferences' => '',
+                'volunteer_availability' => '',
+                'volunteer_address_1' => '',
+                'volunteer_address_2' => '',
+                'volunteer_city' => '',
+                'volunteer_state' => '',
+                'volunteer_zip' => '', 
+                'volunteer_country' => '',
+                'volunteer_comments' => '',
+                'myCheckbox' => 'true',
+            );
+    
+            $mockedDb = $this->createMock('DatabaseInterface');
+    
+            ob_start();
+            processData($formData,$mockedDb);
+            $result = ob_get_clean();
+    
+            $this->assertEquals('error', $result);
+        }
+
+        //test12
+        public function test_processData_zipcode_error() {
+        
+            $formData = array(
+                'volunteer_fullname' => 'Jhone',
+                'volunteer_email' => 'jone@gmail.com',
+                'volunteer_contact' => '9898787767',
+                'volunteer_aadhaar' => '787678765434',
+                'volunteer_age' => '',
+                'volunteer_profession' => '',
+                'option1' => '', 
+                'volunteer_duration' => '', 
+                'volunteer_preferences' => '',
+                'volunteer_availability' => '',
+                'volunteer_address_1' => '',
+                'volunteer_address_2' => '',
+                'volunteer_city' => '',
+                'volunteer_state' => '',
+                'volunteer_zip' => '50003', 
+                'volunteer_country' => '',
+                'volunteer_comments' => '',
+                'myCheckbox' => 'true',
+            );
+    
+            $mockedDb = $this->createMock('DatabaseInterface');
+    
+            ob_start();
+            processData($formData,$mockedDb);
+            $result = ob_get_clean();
+    
+            $this->assertEquals('error_zip', $result);
+        }
+
+        //test13
+        public function test_processData_zipcode_success() {
+        
+            $formData = array(
+                'volunteer_fullname' => 'Jhone',
+                'volunteer_email' => 'jone@gmail.com',
+                'volunteer_contact' => '9898787767',
+                'volunteer_aadhaar' => '787678765434',
+                'volunteer_age' => '',
+                'volunteer_profession' => '',
+                'option1' => '', 
+                'volunteer_duration' => '', 
+                'volunteer_preferences' => '',
+                'volunteer_availability' => '',
+                'volunteer_address_1' => '',
+                'volunteer_address_2' => '',
+                'volunteer_city' => '',
+                'volunteer_state' => '',
+                'volunteer_zip' => '500032', 
+                'volunteer_country' => '',
+                'volunteer_comments' => '',
+                'myCheckbox' => 'true',
+            );
+    
+            $mockedDb = $this->createMock('DatabaseInterface');
+    
+            ob_start();
+            processData($formData,$mockedDb);
+            $result = ob_get_clean();
+    
+            $this->assertEquals('success', $result);
+        }
+
+        //test14
+        public function test_processData_duration_true() {
+        
+            $formData = array(
+                'volunteer_fullname' => 'Jhone',
+                'volunteer_email' => 'jone@gmail.com',
+                'volunteer_contact' => '9898787767',
+                'volunteer_aadhaar' => '787678765434',
+                'volunteer_age' => '',
+                'volunteer_profession' => '',
+                'option1' => 'true', 
+                'volunteer_duration' => 'null', 
+                'volunteer_preferences' => '',
+                'volunteer_availability' => '',
+                'volunteer_address_1' => '',
+                'volunteer_address_2' => '',
+                'volunteer_city' => '',
+                'volunteer_state' => '',
+                'volunteer_zip' => '500032', 
+                'volunteer_country' => '',
+                'volunteer_comments' => '',
+                'myCheckbox' => 'true',
+            );
+    
+            $mockedDb = $this->createMock('DatabaseInterface');
+    
+            ob_start();
+            processData($formData,$mockedDb);
+            $result = ob_get_clean();
+    
+            $this->assertEquals('duration_error', $result);
+        }
 }

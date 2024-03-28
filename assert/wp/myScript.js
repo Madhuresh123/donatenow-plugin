@@ -336,7 +336,7 @@ jQuery(document).ready(function($){
         processData: false,
         contentType: false,
         success: function(response){
-            if(response === 'success'){
+            if(response === 'success0'){
 
               $('#volunteer-form').css('display','none');
 
