@@ -32,7 +32,6 @@
 
 function proccessContactData($formData,$wpdb){
 
-
     global $table_prefix;
 
     $wp_spiral_contact_form = $table_prefix . 'spiral_contact_form';

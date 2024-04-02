@@ -12,8 +12,6 @@
 
   $q = "SELECT * from `$wp_districts`;";
   $districts = $wpdb->get_results($q);
-
-
 ?>
       <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 

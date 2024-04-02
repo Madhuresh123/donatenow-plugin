@@ -1,43 +1,4 @@
 
-<?php
-if(isset($_POST['register'])){
-    global $wpdb, $table_prefix;
-
-    $full_name = $wpdb->escape($_POST['full_name']);
-    $email = $wpdb->escape($_POST['email']);
-    $contact = $wpdb->escape($_POST['contact']);
-    $pan = $wpdb->escape($_POST['pan']);
-    $amount = $wpdb->escape($_POST['amount']);
-    
-    $wp_donation = $table_prefix . 'donation';
-    
-  // Prepare user data
-  $user_data = array(
-      'full_name' => $full_name,
-      'email' => $email ,
-      'contact' => $contact ,
-      'PAN' => $pan,
-      'amount' => $amount,
-      'status' => 0,
-      'Date' => current_time('mysql')
-);
-
-  // Insert user data into the database
-  $isSubmit = $wpdb->insert($wp_donation, $user_data);
-   
-
-  if ($isSubmit) {
-    // include(__DIR__.'/../receipt/thank_you.php');
-    // exit;
-    echo '<script>window.location.href = "' . esc_url(site_url('/donation_receipt_2')) . '";</script>';
-    exit;
-  } else {
-     
-      echo 'Error inserting user data into the database.';
-  }
-  }
-    ?>
-
 <div class=donate-box>
     <div class="donation-form-title"><h2>Personal Information</h2></div>
 
@@ -47,11 +8,11 @@ if(isset($_POST['register'])){
       <div class="first-info">
         <div class="form-group">
           <label for="name">Full Name<span class="required-symbol">*</span></label><br>
-          <input class="donor-input" type="text" id="name" name="full_name" placeholder="Full Name" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required>
+          <input class="donor-input" type="text" id="donor_name" name="donor_name" placeholder="Full Name" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required>
         </div>
         <div class="form-group">
           <label for="email">Email Address<span class="required-symbol">*</span></label><br>
-          <input  class="donor-input" type="email" id="email" name="email" placeholder="Email Address" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)"  required>
+          <input  class="donor-input" type="email" id="donor_email" name="donor_email" placeholder="Email Address" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)"  required>
         </div>
       </div>
   
@@ -59,11 +20,11 @@ if(isset($_POST['register'])){
   
         <div class="form-group">
           <label for="contact">Contact Number<span class="required-symbol">*</span></label><br>
-          <input class="donor-input"  type="tel" id="contact" name="contact"  placeholder="Contact Number"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required>
+          <input class="donor-input"  type="tel" id="donor_contact" name="donor_contact"  placeholder="Contact Number"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required>
         </div>
         <div class="form-group">
           <label for="pan">PAN Number<span class="required-symbol">*</span></label><br>
-          <input  class="donor-input" type="text" id="pan" name="pan"  placeholder="PAN Number"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required>
+          <input  class="donor-input" type="text" id="donor_pan" name="donor_pan"  placeholder="PAN Number"  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required>
         </div>
   </div>
   
@@ -71,12 +32,12 @@ if(isset($_POST['register'])){
   
   <div class="form-group">
           <label for="Amount">Amount<span class="required-symbol">*</span></label><br>
-          <input  class="donor-input" type="text" id="Amount" name="amount"  placeholder="₹0" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required>
+          <input  class="donor-input" type="text" id="donor_amount" name="donor_amount"  placeholder="₹0" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required>
       </div>
 
   <div class="form-group">
     <label for="address-line-1">Address<span class="required-symbol">*</span></label><br>
-    <textarea class="donor-adddress-input" id="address-line-1" name="address-line-1" placeholder="Enter Address" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required></textarea>
+    <textarea class="donor-adddress-input" id="donor_address" name="donor_address" placeholder="Enter Address" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" required></textarea>
   </div>
 
   </div>
@@ -134,6 +95,71 @@ if(isset($_POST['register'])){
           <input type="submit" class="form_submit_btn" name="register" value="Submit">
         </div>
       </form>
+      <div id="donation-form-result"></div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  
+//donation form
+jQuery(document).ready(function($){
+  let spinal_donation_form = $('#donation-form');
+
+  spinal_donation_form.submit(function(event){
+      event.preventDefault();
+
+      let donor_name = $('#donor_name').val();
+      let donor_email = $('#donor_email').val();
+      let donor_contact = $('#donor_contact').val();
+      let donor_pan = $('#donor_pan').val();
+      let donor_amount = $('#donor_amount').val();
+      let donor_address = $('#donor_address').val();
+
+      let formData = new FormData();
+
+      formData.append('action', 'spinnal_donation_form');
+      formData.append('donor_name', donor_name);
+      formData.append('donor_email', donor_email);
+      formData.append('donor_contact', donor_contact);
+      formData.append('donor_pan', donor_pan);
+      formData.append('donor_amount', donor_amount);
+      formData.append('donor_address', donor_address);
+
+      $.ajax({
+        url: ajaxUrl,
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response){
+            console.log(response);
+            if(response === 'success0'){
+
+              $('#donation-form').css('display','none');
+
+              $('#donation-form-result').text('Thank you! Our volunteer will call you shortly to guide offline donation').css({
+                  'color': 'green',
+                  'margin-left': '20%'
+                  });
+
+
+            }else{
+            
+              $('#donation-form-result').text('Submission failed. Please try again.').css('color', 'red');
+              
+            }
+        },
+        error: function(response){
+            console.log('error');
+            $('#donation-form-result').text('Submission failed. Please try again.').css('color', 'red');
+
+        }
+
+      });
+
+  });
+});
+
+
+
+</script>

@@ -47,7 +47,6 @@ jQuery.validator.addMethod("validAadhaar", function (value, element) {
 });
 
 jQuery.validator.addMethod("validAmount", function (value, element) {
-
   return this.optional(element) || (/^[1-9]\d*$/).test(value) && parseInt(value) < 100000;
 });
 
@@ -58,36 +57,36 @@ jQuery.validator.addMethod("validZipcode", function (value, element) {
 
 jQuery("#donation-form").validate({
   rules: {
-    full_name: {
+    donor_name: {
       noSpecialChars: true
     },
-    email: {
+    donor_email: {
       validEmail: true
     },
-    contact: {
+    donor_contact: {
       onlyTenDigits: true,
     },
-    pan: {
+    donor_pan: {
       validPAN: true
     },
-    amount: {
+    donor_amount: {
       validAmount: true
     }
   },
   messages: {
-    full_name: {
+    donor_name: {
       noSpecialChars: "Please enter valid name"
     },
-    email: {
+    donor_email: {
       validEmail: "Please enter valid email"
     },
-    contact: {
+    donor_contact: {
       onlyTenDigits: "Please enter valid phone number",
     },
-    pan: {
+    donor_pan: {
       validPAN: "Please enter a valid PAN number"
     },
-    amount: {
+    donor_amount: {
       validAmount: "Please enter a valid amount less than 1 lakh"
     }
   }
