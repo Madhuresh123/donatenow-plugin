@@ -1,17 +1,10 @@
 <?php
 
 require_once dirname(__FILE__,2) . '/templates/ajax/ajax_volunteer_form.php';
+require_once dirname(__FILE__,2) . '/templates/ajax/valid_input.php';
 
 
 use PHPUnit\Framework\TestCase;
-
-interface DatabaseInterface {
-    public function insert($table, $data);
-  }
-
-  function current_time( $type = 'mysql' ) {
-    return '2024-03-28 18:10:00'; // Fixed time for testing
-}
 
 
 class VounteerFormTest extends TestCase
@@ -110,6 +103,8 @@ class VounteerFormTest extends TestCase
         $this->assertFalse(validZipcode(" 500032"));
 
         $this->assertFalse(validZipcode("500032 "));
+
+        $this->assertFalse(validZipcode("50032"));
 
     }
 

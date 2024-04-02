@@ -15,6 +15,7 @@
 
 
 ?>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class=volunteer-box>
     <div class="donation-form-title"><h2>Volunteer Registration</h2></div>
@@ -199,7 +200,7 @@
 
   <div class="first-info">
 
-<div style="width:90%;">
+<div style="width:50%;">
 <div><br><span> Please click here to see <a href="https://staging-77e6-ratnaglobaltechnologies.wpcomstaging.com/terms-and-conditions/" style="color:green;">Terms and Condition</a></span></div>
 
 <div ><br>
@@ -209,6 +210,10 @@
 
 
 </div>
+</div>
+
+<div>
+<div class="g-recaptcha" id="captcha_response" data-sitekey="6Lc40qopAAAAAGdyYE8vBv3QSEvAdbYofi5lUQ_e"></div>
 </div>
 
 </div>
@@ -246,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
     noOption.addEventListener('change', updateSelectState);
 });
 </script>
+
 
 <script>
 

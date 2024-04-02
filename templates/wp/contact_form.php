@@ -32,6 +32,7 @@
 
       <p id="contact-form-result"></p> -->
 
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
       <div class=donate-box>
     <div class="donation-form-title"><h2>Contact Us</h2></div>
@@ -70,7 +71,9 @@
   </div>
 
   <div class="form-group">
-         
+    <label>Verify</label>
+  <div class="g-recaptcha" id="captcha_response" data-sitekey="6Lc40qopAAAAAGdyYE8vBv3QSEvAdbYofi5lUQ_e"></div>
+
          </div>
 
   </div>
@@ -85,6 +88,17 @@
   <p>Get to know us, including how you can contact us and how we keep your information secure.</p>
       
   </div>
+
+    <!-- <div class="first-info">
+    <div class="form-group">
+
+    <div class="g-recaptcha" id="captcha_response" data-sitekey="6Lc40qopAAAAAGdyYE8vBv3QSEvAdbYofi5lUQ_e"></div>
+  </div>
+
+  <div class="form-group">
+  </div>
+  </div> -->
+
 
         <div class="button-box">
           <input type="submit" class="form_submit_btn" name="register" value="Submit">

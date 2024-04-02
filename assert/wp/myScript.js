@@ -304,6 +304,9 @@ jQuery(document).ready(function($){
             let volunteer_country       =  $('#volunteer_country').val();
             let volunteer_comments      =  $('#volunteer_comments').val();
             let myCheckbox              =  $('#myCheckbox').is(':checked');
+            let captcha_response = grecaptcha.getResponse();
+
+            captcha_response = (captcha_response.length > 0) ? true : false;
 
 
       let formData = new FormData();
@@ -327,6 +330,7 @@ jQuery(document).ready(function($){
       formData.append('volunteer_country', volunteer_country);
       formData.append('volunteer_comments', volunteer_comments);
       formData.append('myCheckbox', myCheckbox);
+      formData.append('captcha_response', captcha_response);
 
 
       $.ajax({
@@ -388,6 +392,9 @@ jQuery(document).ready(function($){
       let contact_phone = $('#contact_phone').val();
       let contact_subject = $('#contact_subject').val();
       let contact_message = $('#contact_message').val();
+      let captcha_response = grecaptcha.getResponse();
+
+      captcha_response = (captcha_response.length > 0) ? true : false;
 
       let formData = new FormData();
 
@@ -397,6 +404,7 @@ jQuery(document).ready(function($){
       formData.append('contact_phone', contact_phone);
       formData.append('contact_subject', contact_subject);
       formData.append('contact_message', contact_message);
+      formData.append('captcha_response', captcha_response);
 
       $.ajax({
         url: ajaxUrl,
@@ -406,7 +414,7 @@ jQuery(document).ready(function($){
         contentType: false,
         success: function(response){
             console.log(response);
-            if(response === 'success'){
+            if(response === 'success0'){
 
               $('#contact_name').val('');
               $('#contact_email').val('');
